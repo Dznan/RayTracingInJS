@@ -17,7 +17,7 @@ const webpackDevConfig = merge.smart(webpackBaseConfig, {
     })
   ],
   devServer: {
-    contentBase: './dist',
+    contentBase: './docs',
     historyApiFallback: true,
     inline: true,
     port: 8086
