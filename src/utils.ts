@@ -65,6 +65,12 @@ class Utils {
         );
         return rayOutPerp.add(rayOutParallel);
     }
+
+    public static schlick(cosine: number, refIdx: number): number {
+        let r0 = (1 - refIdx) / (1 + refIdx);
+        r0 = r0 * r0;
+        return r0 + (1 - r0) * Math.pow(1- cosine, 5);
+    }
 }
 
 export default Utils;
