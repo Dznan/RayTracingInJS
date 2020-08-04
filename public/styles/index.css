@@ -1,0 +1,81 @@
+html, body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #444;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.canvas-section {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 720px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.panel-section {
+  width: 100%;
+  max-width: 720px;
+  margin: 20px;
+  padding: 20px;
+
+  border-radius: 4px;
+  /*border: 1px solid rgba(0, 0, 0, 0.2);*/
+  background: #555;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#canvas {
+  background: #000;
+}
+
+.button {
+  outline: none;
+  border-radius: 2px;
+  border: none;
+  color: #ccc;
+  background: #333;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: .3s background ease;
+}
+.button:hover {
+  background: #2c85f8;
+}
+.label {
+  color: #ccc;
+  margin: 1em;
+}
+input[type="number"] {
+  padding: 4px 8px;
+  width: 64px;
+  outline: none;
+  border: none;
+  background: #ccc;
+}
+td {
+  color: #ccc;
+  padding: .5em;
+}
+table {
+  margin-bottom: 12px;
+}
