@@ -1,0 +1,2937 @@
+{
+  "errors": [
+  ],
+  "warnings": [
+    "asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).\nThis can impact web performance.\nAssets: \n  toji-gl-matrix-v3.3.0-14-gd50931b.tar.gz (574 KiB)",
+    "webpack performance recommendations: \nYou can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.\nFor more info visit https://webpack.js.org/guides/code-splitting/"
+  ],
+  "version": "4.44.1",
+  "hash": "7b0dc742198b15e27234",
+  "time": 2987,
+  "builtAt": 1596532897708,
+  "publicPath": "",
+  "outputPath": "/Users/zenandong/WebstormProjects/ray-tracing/dist",
+  "assetsByChunkName": {
+    "main": "render.js"
+  },
+  "assets": [
+    {
+      "name": "favicon.ico",
+      "size": 15406,
+      "chunks": [
+      ],
+      "chunkNames": [
+      ],
+      "info": {
+      },
+      "emitted": true
+    },
+    {
+      "name": "index.html",
+      "size": 829,
+      "chunks": [
+      ],
+      "chunkNames": [
+      ],
+      "info": {
+      },
+      "emitted": true
+    },
+    {
+      "name": "render.js",
+      "size": 8463,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "main"
+      ],
+      "info": {
+      },
+      "emitted": true
+    },
+    {
+      "name": "styles/index.css",
+      "size": 1184,
+      "chunks": [
+      ],
+      "chunkNames": [
+      ],
+      "info": {
+      },
+      "emitted": true
+    },
+    {
+      "name": "toji-gl-matrix-v3.3.0-14-gd50931b.tar.gz",
+      "size": 587560,
+      "chunks": [
+      ],
+      "chunkNames": [
+      ],
+      "info": {
+      },
+      "emitted": true,
+      "isOverSizeLimit": true
+    }
+  ],
+  "filteredAssets": 0,
+  "entrypoints": {
+    "main": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "render.js"
+      ],
+      "children": {
+      },
+      "childAssets": {
+      }
+    }
+  },
+  "namedChunkGroups": {
+    "main": {
+      "chunks": [
+        0
+      ],
+      "assets": [
+        "render.js"
+      ],
+      "children": {
+      },
+      "childAssets": {
+      }
+    }
+  },
+  "chunks": [
+    {
+      "id": 0,
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "size": 16508,
+      "names": [
+        "main"
+      ],
+      "files": [
+        "render.js"
+      ],
+      "hash": "42a0cc9eb0902bf3b368",
+      "siblings": [
+      ],
+      "parents": [
+      ],
+      "children": [
+      ],
+      "childrenByOrder": {
+      },
+      "modules": [
+        {
+          "id": 0,
+          "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js 8009ac20f34eb30e3ac5da1bfa127926",
+          "name": "./src/main.js + 10 modules",
+          "index": 0,
+          "index2": 10,
+          "size": 16508,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "issuerPath": null,
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [
+          ],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": null,
+              "module": null,
+              "moduleName": null,
+              "type": "single entry",
+              "userRequest": "./src/main.js",
+              "loc": "main"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": [
+          ],
+          "optimizationBailout": [
+          ],
+          "depth": 0,
+          "modules": [
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "name": "./src/main.js",
+              "index": 0,
+              "index2": 10,
+              "size": 3461,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+              ],
+              "issuer": null,
+              "issuerId": null,
+              "issuerName": null,
+              "issuerPath": null,
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [
+              ],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": null,
+                  "module": null,
+                  "moduleName": null,
+                  "type": "single entry",
+                  "userRequest": "./src/main.js",
+                  "loc": "main"
+                }
+              ],
+              "usedExports": true,
+              "providedExports": [
+              ],
+              "optimizationBailout": [
+                "ModuleConcatenation bailout: Module is an entry point"
+              ],
+              "depth": 0,
+              "source": "import Image from './image';\nimport Vec3 from './vec3';\nimport Ray from './ray';\nimport HitRecord from './hittable';\nimport HittableList from './hittable-list';\nimport Sphere from './sphere';\nimport Camera from './camera';\nimport Utils from './utils';\nimport Lambertian from './lambertian';\nimport Metal from './metal';\n\nfunction rayColor(ray, world, depth) {\n  if (depth <= 0) return Vec3.zeros();\n  var rec = new HitRecord();\n\n  if (world.hit(ray, 1e-5, Infinity, rec)) {\n    // const target = rec.p.add(rec.normal).add(Utils.randomInUnitSphere());\n    // const target = rec.p.add(rec.normal).add(Utils.randomUnitVector());\n    // const target = rec.p.add(Utils.randomUnitVector(rec.normal));\n    // return rayColor(new Ray(rec.p, target.sub(rec.p)), world, depth-1).scale(0.5);\n    var scattered = new Ray();\n    var attenuation = Vec3.zeros();\n    if (rec.material.scatter(ray, rec, attenuation, scattered)) return attenuation.mul(rayColor(scattered, world, depth - 1));\n    return new Vec3(0, 0, 0);\n  }\n\n  var unit = Vec3.uniform(ray.direction);\n  var t = 0.5 * (unit.y + 1.0);\n  return new Vec3(1.0, 1.0, 1.0).scale(1 - t).add(new Vec3(0.5, 0.7, 1.0).scale(t));\n}\n\nfunction drawImage(canvas, ctx) {\n  var samplesPerPixel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;\n  var maxDepth = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 50;\n  // create image buffer\n  var width = canvas.width;\n  var height = canvas.height;\n  var aspectRatio = width / height;\n  var image = new Image(width, height); // setup camera\n\n  var camera = new Camera(aspectRatio); // setup world\n\n  var world = new HittableList();\n  var materialGround = new Lambertian(new Vec3(0.8, 0.8, 0.0));\n  var materialCenter = new Lambertian(new Vec3(0.7, 0.3, 0.3));\n  var materialLeft = new Metal(new Vec3(0.8, 0.8, 0.8));\n  var materialRight = new Metal(new Vec3(0.8, 0.6, 0.2));\n  world.add(new Sphere(new Vec3(0.0, -100.5, -1.0), 100.0, materialGround));\n  world.add(new Sphere(new Vec3(0.0, 0.0, -1.0), 0.5, materialCenter));\n  world.add(new Sphere(new Vec3(-1.0, 0.0, -1.0), 0.5, materialLeft));\n  world.add(new Sphere(new Vec3(1.0, 0.0, -1.0), 0.5, materialRight)); // render\n\n  for (var i = 0; i < width; ++i) {\n    for (var j = 0; j < height; ++j) {\n      var sampleColors = [];\n\n      for (var s = 0; s < samplesPerPixel; ++s) {\n        var u = (i + Utils.random()) / (width - 1);\n        var v = (j + Utils.random()) / (height - 1);\n        var ray = camera.getRay(u, v);\n        sampleColors.push(rayColor(ray, world, maxDepth));\n      } // ImageData's origin is on top left corner\n\n\n      image.setPixel(i, height - j - 1, Utils.sampleColor(sampleColors));\n    }\n  } // draw image\n\n\n  ctx.putImageData(image.imageData, 0, 0);\n}\n\nfunction render() {\n  var canvas = document.querySelector('#canvas');\n\n  if (!canvas.getContext) {\n    console.log('Canvas is not supported in this browser!');\n    return;\n  }\n\n  var ctx = canvas.getContext('2d');\n  var samplesPerPixel = document.querySelector('#spp').value;\n  var depth = document.querySelector('#depth').value;\n  samplesPerPixel = samplesPerPixel ? samplesPerPixel : 4;\n  depth = depth ? depth : 50;\n  console.log('Canvas size:', canvas.width, canvas.height);\n  console.log('Samples/Pixel:', samplesPerPixel);\n  console.log('Depth:', depth);\n  return new Promise(function (resolve) {\n    drawImage(canvas, ctx, samplesPerPixel, depth);\n    resolve();\n  });\n}\n\nwindow.render = render;"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/image.ts",
+              "name": "./src/image.ts",
+              "index": 1,
+              "index2": 0,
+              "size": 1190,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+              ],
+              "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "issuerId": null,
+              "issuerName": "./src/main.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "name": "./src/main.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [
+              ],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./image",
+                  "loc": "1:0-28"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./image",
+                  "loc": "39:18-23"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [
+              ],
+              "depth": 1,
+              "source": "var Image = /** @class */ (function () {\n    function Image(a, b, c) {\n        if (typeof a === 'number')\n            this.imageData = new ImageData(a, b);\n        else\n            this.imageData = new ImageData(a, b, c);\n        this.data = this.imageData.data;\n    }\n    Image.prototype.getPixel = function (x, y) {\n        var p = (y * this.imageData.width + x) << 2;\n        return [this.data[p], this.data[p + 1], this.data[p + 2], this.data[p + 3]];\n    };\n    Image.prototype.setPixel = function (x, y, color) {\n        var p = (y * this.imageData.width + x) << 2;\n        this.data[p] = color[0];\n        this.data[p + 1] = color[1];\n        this.data[p + 2] = color[2];\n        this.data[p + 3] = color.length > 3 ? this.data[3] : 255;\n    };\n    Object.defineProperty(Image.prototype, \"width\", {\n        get: function () {\n            return this.imageData.width;\n        },\n        enumerable: false,\n        configurable: true\n    });\n    Object.defineProperty(Image.prototype, \"height\", {\n        get: function () {\n            return this.imageData.height;\n        },\n        enumerable: false,\n        configurable: true\n    });\n    return Image;\n}());\nexport default Image;\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
+              "name": "./src/utils.ts",
+              "index": 3,
+              "index2": 1,
+              "size": 1740,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+              ],
+              "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "issuerId": null,
+              "issuerName": "./src/main.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "name": "./src/main.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [
+              ],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/vec3.ts",
+                  "module": "./src/vec3.ts",
+                  "moduleName": "./src/vec3.ts",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./utils",
+                  "loc": "1:0-28"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/lambertian.ts",
+                  "module": "./src/lambertian.ts",
+                  "moduleName": "./src/lambertian.ts",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./utils",
+                  "loc": "3:0-28"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+                  "module": "./src/metal.ts",
+                  "moduleName": "./src/metal.ts",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./utils",
+                  "loc": "3:0-28"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./utils",
+                  "loc": "8:0-28"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+                  "module": "./src/metal.ts",
+                  "moduleName": "./src/metal.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "9:24-29"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/lambertian.ts",
+                  "module": "./src/lambertian.ts",
+                  "moduleName": "./src/lambertian.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "9:46-51"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/vec3.ts",
+                  "module": "./src/vec3.ts",
+                  "moduleName": "./src/vec3.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "23:28-33"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/vec3.ts",
+                  "module": "./src/vec3.ts",
+                  "moduleName": "./src/vec3.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "23:48-53"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/vec3.ts",
+                  "module": "./src/vec3.ts",
+                  "moduleName": "./src/vec3.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "23:68-73"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/vec3.ts",
+                  "module": "./src/vec3.ts",
+                  "moduleName": "./src/vec3.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "24:24-29"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/vec3.ts",
+                  "module": "./src/vec3.ts",
+                  "moduleName": "./src/vec3.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "24:40-45"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/vec3.ts",
+                  "module": "./src/vec3.ts",
+                  "moduleName": "./src/vec3.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "24:56-61"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "58:21-26"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "59:21-26"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "65:40-45"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [
+              ],
+              "depth": 1,
+              "source": "import Vec3 from './vec3';\nvar Utils = /** @class */ (function () {\n    function Utils() {\n    }\n    Utils.degreeToRadians = function (degree) {\n        return degree * Math.PI / 180;\n    };\n    Utils.random = function (a, b) {\n        return a ? (b - a) * Math.random() + a : Math.random();\n    };\n    Utils.clamp = function (x, min, max) {\n        return Math.min(Math.max(x, min), max);\n    };\n    Utils.sampleColor = function (samples) {\n        var samplesPerPixel = samples.length;\n        var pixelColor = new Vec3(0, 0, 0);\n        for (var _i = 0, samples_1 = samples; _i < samples_1.length; _i++) {\n            var sample = samples_1[_i];\n            pixelColor = pixelColor.add(sample);\n        }\n        pixelColor = pixelColor.scale(1.0 / samplesPerPixel);\n        pixelColor = pixelColor\n            .apply(Math.sqrt)\n            .apply(function (x) { return Utils.clamp(x, 0, 0.99999); });\n        return pixelColor.scale(256);\n    };\n    Utils.randomInUnitSphere = function () {\n        while (true) {\n            var p = Vec3.random(-1, 1);\n            if (p.magnitude() >= 1.0)\n                continue;\n            return p;\n        }\n    };\n    Utils.randomUnitVector = function () {\n        var a = Utils.random(0, 2 * Math.PI);\n        var z = Utils.random(-1, 1);\n        var r = Math.sqrt(1 - z * z);\n        return new Vec3(r * Math.cos(a), r * Math.sin(a), z);\n    };\n    Utils.randomInHemisphere = function (normal) {\n        var v = Utils.randomInUnitSphere();\n        if (Vec3.dot(v, normal) > 0.0)\n            return v;\n        else\n            return v.neg();\n    };\n    Utils.reflect = function (v, n) {\n        return v.sub(n.scale(2 * Vec3.dot(v, n)));\n    };\n    return Utils;\n}());\nexport default Utils;\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/vec3.ts",
+              "name": "./src/vec3.ts",
+              "index": 2,
+              "index2": 2,
+              "size": 4774,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+              ],
+              "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "issuerId": null,
+              "issuerName": "./src/main.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "name": "./src/main.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [
+              ],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable.ts",
+                  "module": "./src/hittable.ts",
+                  "moduleName": "./src/hittable.ts",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./vec3",
+                  "loc": "1:0-26"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/ray.ts",
+                  "module": "./src/ray.ts",
+                  "moduleName": "./src/ray.ts",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./vec3",
+                  "loc": "1:0-26"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+                  "module": "./src/camera.ts",
+                  "moduleName": "./src/camera.ts",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./vec3",
+                  "loc": "1:0-26"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/sphere.ts",
+                  "module": "./src/sphere.ts",
+                  "moduleName": "./src/sphere.ts",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./vec3",
+                  "loc": "1:0-26"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
+                  "module": "./src/utils.ts",
+                  "moduleName": "./src/utils.ts",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./vec3",
+                  "loc": "1:0-26"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+                  "module": "./src/metal.ts",
+                  "moduleName": "./src/metal.ts",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./vec3",
+                  "loc": "1:0-26"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./vec3",
+                  "loc": "2:0-26"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/lambertian.ts",
+                  "module": "./src/lambertian.ts",
+                  "moduleName": "./src/lambertian.ts",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./vec3",
+                  "loc": "2:0-26"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/ray.ts",
+                  "module": "./src/ray.ts",
+                  "moduleName": "./src/ray.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "4:30-34"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/sphere.ts",
+                  "module": "./src/sphere.ts",
+                  "moduleName": "./src/sphere.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "4:34-38"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/ray.ts",
+                  "module": "./src/ray.ts",
+                  "moduleName": "./src/ray.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "4:40-44"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/ray.ts",
+                  "module": "./src/ray.ts",
+                  "moduleName": "./src/ray.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "5:33-37"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/ray.ts",
+                  "module": "./src/ray.ts",
+                  "moduleName": "./src/ray.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "5:43-47"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable.ts",
+                  "module": "./src/hittable.ts",
+                  "moduleName": "./src/hittable.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "6:27-31"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+                  "module": "./src/camera.ts",
+                  "moduleName": "./src/camera.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "9:26-30"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+                  "module": "./src/metal.ts",
+                  "moduleName": "./src/metal.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "9:38-42"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/sphere.ts",
+                  "module": "./src/sphere.ts",
+                  "moduleName": "./src/sphere.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "10:16-20"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable.ts",
+                  "module": "./src/hittable.ts",
+                  "moduleName": "./src/hittable.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "10:20-24"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+                  "module": "./src/camera.ts",
+                  "moduleName": "./src/camera.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "10:30-34"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/lambertian.ts",
+                  "module": "./src/lambertian.ts",
+                  "moduleName": "./src/lambertian.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "11:8-12"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+                  "module": "./src/metal.ts",
+                  "moduleName": "./src/metal.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "11:8-12"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/sphere.ts",
+                  "module": "./src/sphere.ts",
+                  "moduleName": "./src/sphere.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "11:20-24"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable.ts",
+                  "module": "./src/hittable.ts",
+                  "moduleName": "./src/hittable.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "11:25-29"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/ray.ts",
+                  "module": "./src/ray.ts",
+                  "moduleName": "./src/ray.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "11:25-29"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+                  "module": "./src/camera.ts",
+                  "moduleName": "./src/camera.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "11:28-32"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+                  "module": "./src/metal.ts",
+                  "moduleName": "./src/metal.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "12:15-19"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/sphere.ts",
+                  "module": "./src/sphere.ts",
+                  "moduleName": "./src/sphere.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "12:16-20"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/ray.ts",
+                  "module": "./src/ray.ts",
+                  "moduleName": "./src/ray.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "12:28-32"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "13:25-29"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+                  "module": "./src/camera.ts",
+                  "moduleName": "./src/camera.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "15:21-25"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
+                  "module": "./src/utils.ts",
+                  "moduleName": "./src/utils.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "16:29-33"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/sphere.ts",
+                  "module": "./src/sphere.ts",
+                  "moduleName": "./src/sphere.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "21:35-39"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "22:22-26"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/sphere.ts",
+                  "module": "./src/sphere.ts",
+                  "moduleName": "./src/sphere.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "22:50-54"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "24:15-19"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "27:13-17"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "29:13-17"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
+                  "module": "./src/utils.ts",
+                  "moduleName": "./src/utils.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "29:20-24"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "29:54-58"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
+                  "module": "./src/utils.ts",
+                  "moduleName": "./src/utils.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "39:19-23"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
+                  "module": "./src/utils.ts",
+                  "moduleName": "./src/utils.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "43:12-16"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "44:42-46"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "45:42-46"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "46:35-39"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "47:36-40"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "48:27-31"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "49:27-31"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
+                  "module": "./src/utils.ts",
+                  "moduleName": "./src/utils.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "49:33-37"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "50:27-31"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "51:27-31"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [
+              ],
+              "depth": 1,
+              "source": "import Utils from './utils';\nvar Vec3 = /** @class */ (function () {\n    function Vec3(a, b, c) {\n        var values = [0, 0, 0];\n        if (typeof a === 'number') {\n            values = [a, b, c];\n        }\n        else if (Array.isArray(a)) {\n            values = Vec3.fromValues.apply(Vec3, a);\n        }\n        else if (a instanceof Vec3) {\n            values = Vec3.fromValues(a[0], a[1], a[2]);\n        }\n        this[0] = values[0];\n        this[1] = values[1];\n        this[2] = values[2];\n    }\n    Vec3.zeros = function () {\n        return new Vec3(0, 0, 0);\n    };\n    Vec3.random = function (a, b) {\n        if (a)\n            return new Vec3(Utils.random(a, b), Utils.random(a, b), Utils.random(a, b));\n        return new Vec3(Utils.random(), Utils.random(), Utils.random());\n    };\n    Vec3.fromValues = function (a, b, c) {\n        if (Array.isArray(a)) {\n            return [a[0], a[1], a[2]];\n        }\n        else {\n            return [a, b, c];\n        }\n    };\n    Vec3.add = function (out, a, b) {\n        if (!out)\n            out = Vec3.zeros();\n        out[0] = a[0] + b[0];\n        out[1] = a[1] + b[1];\n        out[2] = a[2] + b[2];\n        return out;\n    };\n    Vec3.sub = function (out, a, b) {\n        if (!out)\n            out = Vec3.zeros();\n        out[0] = a[0] - b[0];\n        out[1] = a[1] - b[1];\n        out[2] = a[2] - b[2];\n        return out;\n    };\n    Vec3.mul = function (out, a, b) {\n        if (!out)\n            out = Vec3.zeros();\n        out[0] = a[0] * b[0];\n        out[1] = a[1] * b[1];\n        out[2] = a[2] * b[2];\n        return out;\n    };\n    Vec3.scale = function (out, a, b) {\n        if (!out)\n            out = Vec3.zeros();\n        out[0] = a[0] * b;\n        out[1] = a[1] * b;\n        out[2] = a[2] * b;\n        return out;\n    };\n    Vec3.divide = function (out, a, b) {\n        if (!out)\n            out = Vec3.zeros();\n        out[0] = a[0] / b;\n        out[1] = a[1] / b;\n        out[2] = a[2] / b;\n        return out;\n    };\n    Vec3.neg = function (out, a) {\n        if (!out)\n            out = Vec3.zeros();\n        out[0] = -a[0];\n        out[1] = -a[1];\n        out[2] = -a[2];\n        return out;\n    };\n    Vec3.dot = function (a, b) {\n        return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];\n    };\n    Vec3.magnitude = function (v) {\n        return Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);\n    };\n    Vec3.uniform = function (v) {\n        return Vec3.divide(undefined, v, Vec3.magnitude(v));\n    };\n    Vec3.apply = function (out, func, a) {\n        if (!out)\n            out = Vec3.zeros();\n        out[0] = func(a[0]);\n        out[1] = func(a[1]);\n        out[2] = func(a[2]);\n        return out;\n    };\n    Vec3.clone = function (dst, src) {\n        dst[0] = src[0];\n        dst[1] = src[1];\n        dst[2] = src[2];\n    };\n    Vec3.prototype.clone = function () {\n        return new Vec3(this[0], this[1], this[2]);\n    };\n    Vec3.prototype.add = function (b) {\n        return Vec3.add(undefined, this, b);\n    };\n    Vec3.prototype.sub = function (b) {\n        return Vec3.sub(undefined, this, b);\n    };\n    Vec3.prototype.mul = function (b) {\n        return Vec3.mul(undefined, this, b);\n    };\n    Vec3.prototype.scale = function (b) {\n        return Vec3.scale(undefined, this, b);\n    };\n    Vec3.prototype.divide = function (b) {\n        return Vec3.divide(undefined, this, b);\n    };\n    Vec3.prototype.neg = function () {\n        return Vec3.neg(undefined, this);\n    };\n    Vec3.prototype.dot = function (b) {\n        return Vec3.dot(this, b);\n    };\n    Vec3.prototype.magnitude = function () {\n        return Vec3.magnitude(this);\n    };\n    Vec3.prototype.uniform = function () {\n        return Vec3.uniform(this);\n    };\n    Vec3.prototype.apply = function (func) {\n        return Vec3.apply(undefined, func, this);\n    };\n    Object.defineProperty(Vec3.prototype, \"length\", {\n        get: function () {\n            return 3;\n        },\n        enumerable: false,\n        configurable: true\n    });\n    Object.defineProperty(Vec3.prototype, \"x\", {\n        get: function () {\n            return this[0];\n        },\n        set: function (v) {\n            this[0] = v;\n        },\n        enumerable: false,\n        configurable: true\n    });\n    Object.defineProperty(Vec3.prototype, \"y\", {\n        get: function () {\n            return this[1];\n        },\n        set: function (v) {\n            this[1] = v;\n        },\n        enumerable: false,\n        configurable: true\n    });\n    Object.defineProperty(Vec3.prototype, \"z\", {\n        get: function () {\n            return this[2];\n        },\n        set: function (v) {\n            this[2] = v;\n        },\n        enumerable: false,\n        configurable: true\n    });\n    return Vec3;\n}());\nexport default Vec3;\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/ray.ts",
+              "name": "./src/ray.ts",
+              "index": 4,
+              "index2": 3,
+              "size": 489,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+              ],
+              "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "issuerId": null,
+              "issuerName": "./src/main.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "name": "./src/main.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [
+              ],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/lambertian.ts",
+                  "module": "./src/lambertian.ts",
+                  "moduleName": "./src/lambertian.ts",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./ray",
+                  "loc": "1:0-24"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+                  "module": "./src/camera.ts",
+                  "moduleName": "./src/camera.ts",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./ray",
+                  "loc": "2:0-24"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+                  "module": "./src/metal.ts",
+                  "moduleName": "./src/metal.ts",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./ray",
+                  "loc": "2:0-24"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./ray",
+                  "loc": "3:0-24"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/lambertian.ts",
+                  "module": "./src/lambertian.ts",
+                  "moduleName": "./src/lambertian.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./ray",
+                  "loc": "10:8-11"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+                  "module": "./src/metal.ts",
+                  "moduleName": "./src/metal.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./ray",
+                  "loc": "10:8-11"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/lambertian.ts",
+                  "module": "./src/lambertian.ts",
+                  "moduleName": "./src/lambertian.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./ray",
+                  "loc": "10:33-36"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+                  "module": "./src/metal.ts",
+                  "moduleName": "./src/metal.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./ray",
+                  "loc": "10:33-36"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+                  "module": "./src/camera.ts",
+                  "moduleName": "./src/camera.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./ray",
+                  "loc": "18:19-22"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./ray",
+                  "loc": "21:24-27"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [
+              ],
+              "depth": 1,
+              "source": "import Vec3 from './vec3';\nvar Ray = /** @class */ (function () {\n    function Ray(a, b) {\n        this.origin = a ? new Vec3(a) : Vec3.zeros();\n        this.direction = b ? new Vec3(b) : Vec3.zeros();\n    }\n    Ray.prototype.at = function (t) {\n        return this.direction.scale(t).add(this.origin);\n    };\n    Ray.clone = function (dst, src) {\n        dst.origin = new Vec3(src.origin);\n        dst.direction = new Vec3(src.direction);\n    };\n    return Ray;\n}());\nexport default Ray;\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable.ts",
+              "name": "./src/hittable.ts",
+              "index": 5,
+              "index2": 4,
+              "size": 617,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+              ],
+              "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "issuerId": null,
+              "issuerName": "./src/main.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "name": "./src/main.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [
+              ],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable-list.ts",
+                  "module": "./src/hittable-list.ts",
+                  "moduleName": "./src/hittable-list.ts",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./hittable",
+                  "loc": "1:0-35"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./hittable",
+                  "loc": "4:0-35"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable-list.ts",
+                  "module": "./src/hittable-list.ts",
+                  "moduleName": "./src/hittable-list.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./hittable",
+                  "loc": "7:26-35"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./hittable",
+                  "loc": "14:16-25"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable-list.ts",
+                  "module": "./src/hittable-list.ts",
+                  "moduleName": "./src/hittable-list.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./hittable",
+                  "loc": "15:16-25"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [
+              ],
+              "depth": 1,
+              "source": "import Vec3 from './vec3';\nvar HitRecord = /** @class */ (function () {\n    function HitRecord() {\n    }\n    HitRecord.prototype.setFaceNormal = function (ray, outwardNormal) {\n        this.isFrontFace = Vec3.dot(ray.direction, outwardNormal) < 0;\n        this.normal = this.isFrontFace ? outwardNormal : outwardNormal.neg();\n    };\n    HitRecord.clone = function (dst, src) {\n        dst.p = new Vec3(src.p);\n        dst.normal = new Vec3(src.normal);\n        dst.t = src.t;\n        dst.isFrontFace = src.isFrontFace;\n        dst.material = src.material;\n    };\n    return HitRecord;\n}());\nexport default HitRecord;\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable-list.ts",
+              "name": "./src/hittable-list.ts",
+              "index": 6,
+              "index2": 5,
+              "size": 930,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+              ],
+              "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "issuerId": null,
+              "issuerName": "./src/main.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "name": "./src/main.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [
+              ],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./hittable-list",
+                  "loc": "5:0-43"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./hittable-list",
+                  "loc": "43:18-30"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [
+              ],
+              "depth": 1,
+              "source": "import HitRecord from './hittable';\nvar HittableList = /** @class */ (function () {\n    function HittableList() {\n        this.hittableObjects = [];\n    }\n    HittableList.prototype.hit = function (ray, t_min, t_max, rec) {\n        var tempRec = new HitRecord();\n        var hitAnything = false;\n        var closestSoFar = t_max;\n        for (var _i = 0, _a = this.hittableObjects; _i < _a.length; _i++) {\n            var obj = _a[_i];\n            if (obj.hit(ray, t_min, closestSoFar, tempRec)) {\n                hitAnything = true;\n                closestSoFar = tempRec.t;\n                HitRecord.clone(rec, tempRec);\n            }\n        }\n        return hitAnything;\n    };\n    HittableList.prototype.clear = function () {\n        this.hittableObjects = [];\n    };\n    HittableList.prototype.add = function (obj) {\n        this.hittableObjects.push(obj);\n    };\n    return HittableList;\n}());\nexport default HittableList;\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/sphere.ts",
+              "name": "./src/sphere.ts",
+              "index": 7,
+              "index2": 6,
+              "size": 1270,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+              ],
+              "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "issuerId": null,
+              "issuerName": "./src/main.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "name": "./src/main.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [
+              ],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./sphere",
+                  "loc": "6:0-30"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./sphere",
+                  "loc": "48:16-22"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./sphere",
+                  "loc": "49:16-22"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./sphere",
+                  "loc": "50:16-22"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./sphere",
+                  "loc": "51:16-22"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [
+              ],
+              "depth": 1,
+              "source": "import Vec3 from './vec3';\nvar Sphere = /** @class */ (function () {\n    function Sphere(a, b, material) {\n        this.center = a ? a : new Vec3(a);\n        this.radius = b ? b : 1;\n        this.material = material ? material : undefined;\n    }\n    Sphere.prototype.hit = function (ray, t_min, t_max, recOut) {\n        var oc = ray.origin.sub(this.center);\n        var a = Vec3.dot(ray.direction, ray.direction);\n        var halfb = Vec3.dot(oc, ray.direction);\n        var c = Vec3.dot(oc, oc) - this.radius * this.radius;\n        var discriminant = halfb * halfb - a * c;\n        if (discriminant > 0) {\n            var root = Math.sqrt(discriminant);\n            var ts = [(-halfb - root) / a, (-halfb + root) / a];\n            for (var _i = 0, ts_1 = ts; _i < ts_1.length; _i++) {\n                var t = ts_1[_i];\n                if (t < t_max && t > t_min) {\n                    recOut.t = t;\n                    recOut.p = new Vec3(ray.at(recOut.t));\n                    recOut.setFaceNormal(ray, new Vec3((recOut.p.sub(this.center)).divide(this.radius)));\n                    recOut.material = this.material;\n                    return true;\n                }\n            }\n        }\n        return false;\n    };\n    return Sphere;\n}());\nexport default Sphere;\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+              "name": "./src/camera.ts",
+              "index": 8,
+              "index2": 7,
+              "size": 929,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+              ],
+              "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "issuerId": null,
+              "issuerName": "./src/main.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "name": "./src/main.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [
+              ],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./camera",
+                  "loc": "7:0-30"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./camera",
+                  "loc": "41:19-25"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [
+              ],
+              "depth": 1,
+              "source": "import Vec3 from './vec3';\nimport Ray from './ray';\nvar Camera = /** @class */ (function () {\n    function Camera(aspectRatio) {\n        this.aspectRatio = aspectRatio;\n        this.viewportHeight = 2.0;\n        this.viewportWidth = aspectRatio * this.viewportHeight;\n        this.focalLength = 1.0;\n        this.origin = new Vec3(0, 0, 0);\n        this.horizontal = new Vec3(this.viewportWidth, 0, 0);\n        this.vertical = new Vec3(0, this.viewportHeight, 0);\n        this.lowerLeftCorner = this.origin\n            .sub(this.horizontal.scale(0.5))\n            .sub(this.vertical.scale(0.5))\n            .sub(new Vec3(0, 0, this.focalLength));\n    }\n    Camera.prototype.getRay = function (u, v) {\n        return new Ray(this.origin, this.lowerLeftCorner\n            .add(this.horizontal.scale(u))\n            .add(this.vertical.scale(v))\n            .sub(this.origin));\n    };\n    return Camera;\n}());\nexport default Camera;\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/lambertian.ts",
+              "name": "./src/lambertian.ts",
+              "index": 9,
+              "index2": 8,
+              "size": 545,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+              ],
+              "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "issuerId": null,
+              "issuerName": "./src/main.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "name": "./src/main.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [
+              ],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./lambertian",
+                  "loc": "9:0-38"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./lambertian",
+                  "loc": "44:27-37"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./lambertian",
+                  "loc": "45:27-37"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [
+              ],
+              "depth": 1,
+              "source": "import Ray from './ray';\nimport Vec3 from './vec3';\nimport Utils from './utils';\nvar Lambertian = /** @class */ (function () {\n    function Lambertian(color) {\n        this.albedo = color;\n    }\n    Lambertian.prototype.scatter = function (rayIn, rec, attenuation, scattered) {\n        var scatterDirection = rec.normal.add(Utils.randomUnitVector());\n        Ray.clone(scattered, new Ray(rec.p, scatterDirection));\n        Vec3.clone(attenuation, this.albedo);\n        return true;\n    };\n    return Lambertian;\n}());\nexport default Lambertian;\n"
+            },
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+              "name": "./src/metal.ts",
+              "index": 10,
+              "index2": 9,
+              "size": 563,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+              ],
+              "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "issuerId": null,
+              "issuerName": "./src/main.js",
+              "issuerPath": [
+                {
+                  "id": null,
+                  "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "name": "./src/main.js"
+                }
+              ],
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "assets": [
+              ],
+              "reasons": [
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./metal",
+                  "loc": "10:0-28"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./metal",
+                  "loc": "46:25-30"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./metal",
+                  "loc": "47:26-31"
+                }
+              ],
+              "usedExports": [
+                "default"
+              ],
+              "providedExports": [
+                "default"
+              ],
+              "optimizationBailout": [
+              ],
+              "depth": 1,
+              "source": "import Vec3 from './vec3';\nimport Ray from './ray';\nimport Utils from './utils';\nvar Metal = /** @class */ (function () {\n    function Metal(color) {\n        this.albedo = color;\n    }\n    Metal.prototype.scatter = function (rayIn, rec, attenuation, scattered) {\n        var reflected = Utils.reflect(Vec3.uniform(rayIn.direction), rec.normal);\n        Ray.clone(scattered, new Ray(rec.p, reflected));\n        Vec3.clone(attenuation, this.albedo);\n        return Vec3.dot(scattered.direction, rec.normal) > 0;\n    };\n    return Metal;\n}());\nexport default Metal;\n"
+            }
+          ],
+          "filteredModules": 0
+        }
+      ],
+      "filteredModules": 0,
+      "origins": [
+        {
+          "module": "",
+          "moduleIdentifier": "",
+          "moduleName": "",
+          "loc": "main",
+          "request": "./src/main.js",
+          "reasons": [
+          ]
+        }
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": 0,
+      "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js 8009ac20f34eb30e3ac5da1bfa127926",
+      "name": "./src/main.js + 10 modules",
+      "index": 0,
+      "index2": 10,
+      "size": 16508,
+      "cacheable": true,
+      "built": true,
+      "optional": false,
+      "prefetched": false,
+      "chunks": [
+        0
+      ],
+      "issuer": null,
+      "issuerId": null,
+      "issuerName": null,
+      "issuerPath": null,
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "assets": [
+      ],
+      "reasons": [
+        {
+          "moduleId": null,
+          "moduleIdentifier": null,
+          "module": null,
+          "moduleName": null,
+          "type": "single entry",
+          "userRequest": "./src/main.js",
+          "loc": "main"
+        }
+      ],
+      "usedExports": true,
+      "providedExports": [
+      ],
+      "optimizationBailout": [
+      ],
+      "depth": 0,
+      "modules": [
+        {
+          "id": null,
+          "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+          "name": "./src/main.js",
+          "index": 0,
+          "index2": 10,
+          "size": 3461,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+          ],
+          "issuer": null,
+          "issuerId": null,
+          "issuerName": null,
+          "issuerPath": null,
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [
+          ],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": null,
+              "module": null,
+              "moduleName": null,
+              "type": "single entry",
+              "userRequest": "./src/main.js",
+              "loc": "main"
+            }
+          ],
+          "usedExports": true,
+          "providedExports": [
+          ],
+          "optimizationBailout": [
+            "ModuleConcatenation bailout: Module is an entry point"
+          ],
+          "depth": 0,
+          "source": "import Image from './image';\nimport Vec3 from './vec3';\nimport Ray from './ray';\nimport HitRecord from './hittable';\nimport HittableList from './hittable-list';\nimport Sphere from './sphere';\nimport Camera from './camera';\nimport Utils from './utils';\nimport Lambertian from './lambertian';\nimport Metal from './metal';\n\nfunction rayColor(ray, world, depth) {\n  if (depth <= 0) return Vec3.zeros();\n  var rec = new HitRecord();\n\n  if (world.hit(ray, 1e-5, Infinity, rec)) {\n    // const target = rec.p.add(rec.normal).add(Utils.randomInUnitSphere());\n    // const target = rec.p.add(rec.normal).add(Utils.randomUnitVector());\n    // const target = rec.p.add(Utils.randomUnitVector(rec.normal));\n    // return rayColor(new Ray(rec.p, target.sub(rec.p)), world, depth-1).scale(0.5);\n    var scattered = new Ray();\n    var attenuation = Vec3.zeros();\n    if (rec.material.scatter(ray, rec, attenuation, scattered)) return attenuation.mul(rayColor(scattered, world, depth - 1));\n    return new Vec3(0, 0, 0);\n  }\n\n  var unit = Vec3.uniform(ray.direction);\n  var t = 0.5 * (unit.y + 1.0);\n  return new Vec3(1.0, 1.0, 1.0).scale(1 - t).add(new Vec3(0.5, 0.7, 1.0).scale(t));\n}\n\nfunction drawImage(canvas, ctx) {\n  var samplesPerPixel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;\n  var maxDepth = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 50;\n  // create image buffer\n  var width = canvas.width;\n  var height = canvas.height;\n  var aspectRatio = width / height;\n  var image = new Image(width, height); // setup camera\n\n  var camera = new Camera(aspectRatio); // setup world\n\n  var world = new HittableList();\n  var materialGround = new Lambertian(new Vec3(0.8, 0.8, 0.0));\n  var materialCenter = new Lambertian(new Vec3(0.7, 0.3, 0.3));\n  var materialLeft = new Metal(new Vec3(0.8, 0.8, 0.8));\n  var materialRight = new Metal(new Vec3(0.8, 0.6, 0.2));\n  world.add(new Sphere(new Vec3(0.0, -100.5, -1.0), 100.0, materialGround));\n  world.add(new Sphere(new Vec3(0.0, 0.0, -1.0), 0.5, materialCenter));\n  world.add(new Sphere(new Vec3(-1.0, 0.0, -1.0), 0.5, materialLeft));\n  world.add(new Sphere(new Vec3(1.0, 0.0, -1.0), 0.5, materialRight)); // render\n\n  for (var i = 0; i < width; ++i) {\n    for (var j = 0; j < height; ++j) {\n      var sampleColors = [];\n\n      for (var s = 0; s < samplesPerPixel; ++s) {\n        var u = (i + Utils.random()) / (width - 1);\n        var v = (j + Utils.random()) / (height - 1);\n        var ray = camera.getRay(u, v);\n        sampleColors.push(rayColor(ray, world, maxDepth));\n      } // ImageData's origin is on top left corner\n\n\n      image.setPixel(i, height - j - 1, Utils.sampleColor(sampleColors));\n    }\n  } // draw image\n\n\n  ctx.putImageData(image.imageData, 0, 0);\n}\n\nfunction render() {\n  var canvas = document.querySelector('#canvas');\n\n  if (!canvas.getContext) {\n    console.log('Canvas is not supported in this browser!');\n    return;\n  }\n\n  var ctx = canvas.getContext('2d');\n  var samplesPerPixel = document.querySelector('#spp').value;\n  var depth = document.querySelector('#depth').value;\n  samplesPerPixel = samplesPerPixel ? samplesPerPixel : 4;\n  depth = depth ? depth : 50;\n  console.log('Canvas size:', canvas.width, canvas.height);\n  console.log('Samples/Pixel:', samplesPerPixel);\n  console.log('Depth:', depth);\n  return new Promise(function (resolve) {\n    drawImage(canvas, ctx, samplesPerPixel, depth);\n    resolve();\n  });\n}\n\nwindow.render = render;"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/image.ts",
+          "name": "./src/image.ts",
+          "index": 1,
+          "index2": 0,
+          "size": 1190,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+          ],
+          "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+          "issuerId": null,
+          "issuerName": "./src/main.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "name": "./src/main.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [
+          ],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./image",
+              "loc": "1:0-28"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./image",
+              "loc": "39:18-23"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [
+          ],
+          "depth": 1,
+          "source": "var Image = /** @class */ (function () {\n    function Image(a, b, c) {\n        if (typeof a === 'number')\n            this.imageData = new ImageData(a, b);\n        else\n            this.imageData = new ImageData(a, b, c);\n        this.data = this.imageData.data;\n    }\n    Image.prototype.getPixel = function (x, y) {\n        var p = (y * this.imageData.width + x) << 2;\n        return [this.data[p], this.data[p + 1], this.data[p + 2], this.data[p + 3]];\n    };\n    Image.prototype.setPixel = function (x, y, color) {\n        var p = (y * this.imageData.width + x) << 2;\n        this.data[p] = color[0];\n        this.data[p + 1] = color[1];\n        this.data[p + 2] = color[2];\n        this.data[p + 3] = color.length > 3 ? this.data[3] : 255;\n    };\n    Object.defineProperty(Image.prototype, \"width\", {\n        get: function () {\n            return this.imageData.width;\n        },\n        enumerable: false,\n        configurable: true\n    });\n    Object.defineProperty(Image.prototype, \"height\", {\n        get: function () {\n            return this.imageData.height;\n        },\n        enumerable: false,\n        configurable: true\n    });\n    return Image;\n}());\nexport default Image;\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
+          "name": "./src/utils.ts",
+          "index": 3,
+          "index2": 1,
+          "size": 1740,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+          ],
+          "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+          "issuerId": null,
+          "issuerName": "./src/main.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "name": "./src/main.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [
+          ],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/vec3.ts",
+              "module": "./src/vec3.ts",
+              "moduleName": "./src/vec3.ts",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./utils",
+              "loc": "1:0-28"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/lambertian.ts",
+              "module": "./src/lambertian.ts",
+              "moduleName": "./src/lambertian.ts",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./utils",
+              "loc": "3:0-28"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+              "module": "./src/metal.ts",
+              "moduleName": "./src/metal.ts",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./utils",
+              "loc": "3:0-28"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./utils",
+              "loc": "8:0-28"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+              "module": "./src/metal.ts",
+              "moduleName": "./src/metal.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "9:24-29"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/lambertian.ts",
+              "module": "./src/lambertian.ts",
+              "moduleName": "./src/lambertian.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "9:46-51"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/vec3.ts",
+              "module": "./src/vec3.ts",
+              "moduleName": "./src/vec3.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "23:28-33"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/vec3.ts",
+              "module": "./src/vec3.ts",
+              "moduleName": "./src/vec3.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "23:48-53"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/vec3.ts",
+              "module": "./src/vec3.ts",
+              "moduleName": "./src/vec3.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "23:68-73"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/vec3.ts",
+              "module": "./src/vec3.ts",
+              "moduleName": "./src/vec3.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "24:24-29"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/vec3.ts",
+              "module": "./src/vec3.ts",
+              "moduleName": "./src/vec3.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "24:40-45"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/vec3.ts",
+              "module": "./src/vec3.ts",
+              "moduleName": "./src/vec3.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "24:56-61"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "58:21-26"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "59:21-26"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "65:40-45"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [
+          ],
+          "depth": 1,
+          "source": "import Vec3 from './vec3';\nvar Utils = /** @class */ (function () {\n    function Utils() {\n    }\n    Utils.degreeToRadians = function (degree) {\n        return degree * Math.PI / 180;\n    };\n    Utils.random = function (a, b) {\n        return a ? (b - a) * Math.random() + a : Math.random();\n    };\n    Utils.clamp = function (x, min, max) {\n        return Math.min(Math.max(x, min), max);\n    };\n    Utils.sampleColor = function (samples) {\n        var samplesPerPixel = samples.length;\n        var pixelColor = new Vec3(0, 0, 0);\n        for (var _i = 0, samples_1 = samples; _i < samples_1.length; _i++) {\n            var sample = samples_1[_i];\n            pixelColor = pixelColor.add(sample);\n        }\n        pixelColor = pixelColor.scale(1.0 / samplesPerPixel);\n        pixelColor = pixelColor\n            .apply(Math.sqrt)\n            .apply(function (x) { return Utils.clamp(x, 0, 0.99999); });\n        return pixelColor.scale(256);\n    };\n    Utils.randomInUnitSphere = function () {\n        while (true) {\n            var p = Vec3.random(-1, 1);\n            if (p.magnitude() >= 1.0)\n                continue;\n            return p;\n        }\n    };\n    Utils.randomUnitVector = function () {\n        var a = Utils.random(0, 2 * Math.PI);\n        var z = Utils.random(-1, 1);\n        var r = Math.sqrt(1 - z * z);\n        return new Vec3(r * Math.cos(a), r * Math.sin(a), z);\n    };\n    Utils.randomInHemisphere = function (normal) {\n        var v = Utils.randomInUnitSphere();\n        if (Vec3.dot(v, normal) > 0.0)\n            return v;\n        else\n            return v.neg();\n    };\n    Utils.reflect = function (v, n) {\n        return v.sub(n.scale(2 * Vec3.dot(v, n)));\n    };\n    return Utils;\n}());\nexport default Utils;\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/vec3.ts",
+          "name": "./src/vec3.ts",
+          "index": 2,
+          "index2": 2,
+          "size": 4774,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+          ],
+          "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+          "issuerId": null,
+          "issuerName": "./src/main.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "name": "./src/main.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [
+          ],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable.ts",
+              "module": "./src/hittable.ts",
+              "moduleName": "./src/hittable.ts",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./vec3",
+              "loc": "1:0-26"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/ray.ts",
+              "module": "./src/ray.ts",
+              "moduleName": "./src/ray.ts",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./vec3",
+              "loc": "1:0-26"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+              "module": "./src/camera.ts",
+              "moduleName": "./src/camera.ts",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./vec3",
+              "loc": "1:0-26"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/sphere.ts",
+              "module": "./src/sphere.ts",
+              "moduleName": "./src/sphere.ts",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./vec3",
+              "loc": "1:0-26"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
+              "module": "./src/utils.ts",
+              "moduleName": "./src/utils.ts",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./vec3",
+              "loc": "1:0-26"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+              "module": "./src/metal.ts",
+              "moduleName": "./src/metal.ts",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./vec3",
+              "loc": "1:0-26"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./vec3",
+              "loc": "2:0-26"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/lambertian.ts",
+              "module": "./src/lambertian.ts",
+              "moduleName": "./src/lambertian.ts",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./vec3",
+              "loc": "2:0-26"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/ray.ts",
+              "module": "./src/ray.ts",
+              "moduleName": "./src/ray.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "4:30-34"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/sphere.ts",
+              "module": "./src/sphere.ts",
+              "moduleName": "./src/sphere.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "4:34-38"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/ray.ts",
+              "module": "./src/ray.ts",
+              "moduleName": "./src/ray.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "4:40-44"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/ray.ts",
+              "module": "./src/ray.ts",
+              "moduleName": "./src/ray.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "5:33-37"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/ray.ts",
+              "module": "./src/ray.ts",
+              "moduleName": "./src/ray.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "5:43-47"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable.ts",
+              "module": "./src/hittable.ts",
+              "moduleName": "./src/hittable.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "6:27-31"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+              "module": "./src/camera.ts",
+              "moduleName": "./src/camera.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "9:26-30"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+              "module": "./src/metal.ts",
+              "moduleName": "./src/metal.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "9:38-42"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/sphere.ts",
+              "module": "./src/sphere.ts",
+              "moduleName": "./src/sphere.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "10:16-20"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable.ts",
+              "module": "./src/hittable.ts",
+              "moduleName": "./src/hittable.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "10:20-24"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+              "module": "./src/camera.ts",
+              "moduleName": "./src/camera.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "10:30-34"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/lambertian.ts",
+              "module": "./src/lambertian.ts",
+              "moduleName": "./src/lambertian.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "11:8-12"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+              "module": "./src/metal.ts",
+              "moduleName": "./src/metal.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "11:8-12"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/sphere.ts",
+              "module": "./src/sphere.ts",
+              "moduleName": "./src/sphere.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "11:20-24"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable.ts",
+              "module": "./src/hittable.ts",
+              "moduleName": "./src/hittable.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "11:25-29"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/ray.ts",
+              "module": "./src/ray.ts",
+              "moduleName": "./src/ray.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "11:25-29"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+              "module": "./src/camera.ts",
+              "moduleName": "./src/camera.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "11:28-32"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+              "module": "./src/metal.ts",
+              "moduleName": "./src/metal.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "12:15-19"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/sphere.ts",
+              "module": "./src/sphere.ts",
+              "moduleName": "./src/sphere.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "12:16-20"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/ray.ts",
+              "module": "./src/ray.ts",
+              "moduleName": "./src/ray.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "12:28-32"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "13:25-29"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+              "module": "./src/camera.ts",
+              "moduleName": "./src/camera.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "15:21-25"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
+              "module": "./src/utils.ts",
+              "moduleName": "./src/utils.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "16:29-33"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/sphere.ts",
+              "module": "./src/sphere.ts",
+              "moduleName": "./src/sphere.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "21:35-39"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "22:22-26"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/sphere.ts",
+              "module": "./src/sphere.ts",
+              "moduleName": "./src/sphere.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "22:50-54"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "24:15-19"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "27:13-17"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "29:13-17"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
+              "module": "./src/utils.ts",
+              "moduleName": "./src/utils.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "29:20-24"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "29:54-58"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
+              "module": "./src/utils.ts",
+              "moduleName": "./src/utils.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "39:19-23"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
+              "module": "./src/utils.ts",
+              "moduleName": "./src/utils.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "43:12-16"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "44:42-46"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "45:42-46"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "46:35-39"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "47:36-40"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "48:27-31"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "49:27-31"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
+              "module": "./src/utils.ts",
+              "moduleName": "./src/utils.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "49:33-37"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "50:27-31"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "51:27-31"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [
+          ],
+          "depth": 1,
+          "source": "import Utils from './utils';\nvar Vec3 = /** @class */ (function () {\n    function Vec3(a, b, c) {\n        var values = [0, 0, 0];\n        if (typeof a === 'number') {\n            values = [a, b, c];\n        }\n        else if (Array.isArray(a)) {\n            values = Vec3.fromValues.apply(Vec3, a);\n        }\n        else if (a instanceof Vec3) {\n            values = Vec3.fromValues(a[0], a[1], a[2]);\n        }\n        this[0] = values[0];\n        this[1] = values[1];\n        this[2] = values[2];\n    }\n    Vec3.zeros = function () {\n        return new Vec3(0, 0, 0);\n    };\n    Vec3.random = function (a, b) {\n        if (a)\n            return new Vec3(Utils.random(a, b), Utils.random(a, b), Utils.random(a, b));\n        return new Vec3(Utils.random(), Utils.random(), Utils.random());\n    };\n    Vec3.fromValues = function (a, b, c) {\n        if (Array.isArray(a)) {\n            return [a[0], a[1], a[2]];\n        }\n        else {\n            return [a, b, c];\n        }\n    };\n    Vec3.add = function (out, a, b) {\n        if (!out)\n            out = Vec3.zeros();\n        out[0] = a[0] + b[0];\n        out[1] = a[1] + b[1];\n        out[2] = a[2] + b[2];\n        return out;\n    };\n    Vec3.sub = function (out, a, b) {\n        if (!out)\n            out = Vec3.zeros();\n        out[0] = a[0] - b[0];\n        out[1] = a[1] - b[1];\n        out[2] = a[2] - b[2];\n        return out;\n    };\n    Vec3.mul = function (out, a, b) {\n        if (!out)\n            out = Vec3.zeros();\n        out[0] = a[0] * b[0];\n        out[1] = a[1] * b[1];\n        out[2] = a[2] * b[2];\n        return out;\n    };\n    Vec3.scale = function (out, a, b) {\n        if (!out)\n            out = Vec3.zeros();\n        out[0] = a[0] * b;\n        out[1] = a[1] * b;\n        out[2] = a[2] * b;\n        return out;\n    };\n    Vec3.divide = function (out, a, b) {\n        if (!out)\n            out = Vec3.zeros();\n        out[0] = a[0] / b;\n        out[1] = a[1] / b;\n        out[2] = a[2] / b;\n        return out;\n    };\n    Vec3.neg = function (out, a) {\n        if (!out)\n            out = Vec3.zeros();\n        out[0] = -a[0];\n        out[1] = -a[1];\n        out[2] = -a[2];\n        return out;\n    };\n    Vec3.dot = function (a, b) {\n        return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];\n    };\n    Vec3.magnitude = function (v) {\n        return Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);\n    };\n    Vec3.uniform = function (v) {\n        return Vec3.divide(undefined, v, Vec3.magnitude(v));\n    };\n    Vec3.apply = function (out, func, a) {\n        if (!out)\n            out = Vec3.zeros();\n        out[0] = func(a[0]);\n        out[1] = func(a[1]);\n        out[2] = func(a[2]);\n        return out;\n    };\n    Vec3.clone = function (dst, src) {\n        dst[0] = src[0];\n        dst[1] = src[1];\n        dst[2] = src[2];\n    };\n    Vec3.prototype.clone = function () {\n        return new Vec3(this[0], this[1], this[2]);\n    };\n    Vec3.prototype.add = function (b) {\n        return Vec3.add(undefined, this, b);\n    };\n    Vec3.prototype.sub = function (b) {\n        return Vec3.sub(undefined, this, b);\n    };\n    Vec3.prototype.mul = function (b) {\n        return Vec3.mul(undefined, this, b);\n    };\n    Vec3.prototype.scale = function (b) {\n        return Vec3.scale(undefined, this, b);\n    };\n    Vec3.prototype.divide = function (b) {\n        return Vec3.divide(undefined, this, b);\n    };\n    Vec3.prototype.neg = function () {\n        return Vec3.neg(undefined, this);\n    };\n    Vec3.prototype.dot = function (b) {\n        return Vec3.dot(this, b);\n    };\n    Vec3.prototype.magnitude = function () {\n        return Vec3.magnitude(this);\n    };\n    Vec3.prototype.uniform = function () {\n        return Vec3.uniform(this);\n    };\n    Vec3.prototype.apply = function (func) {\n        return Vec3.apply(undefined, func, this);\n    };\n    Object.defineProperty(Vec3.prototype, \"length\", {\n        get: function () {\n            return 3;\n        },\n        enumerable: false,\n        configurable: true\n    });\n    Object.defineProperty(Vec3.prototype, \"x\", {\n        get: function () {\n            return this[0];\n        },\n        set: function (v) {\n            this[0] = v;\n        },\n        enumerable: false,\n        configurable: true\n    });\n    Object.defineProperty(Vec3.prototype, \"y\", {\n        get: function () {\n            return this[1];\n        },\n        set: function (v) {\n            this[1] = v;\n        },\n        enumerable: false,\n        configurable: true\n    });\n    Object.defineProperty(Vec3.prototype, \"z\", {\n        get: function () {\n            return this[2];\n        },\n        set: function (v) {\n            this[2] = v;\n        },\n        enumerable: false,\n        configurable: true\n    });\n    return Vec3;\n}());\nexport default Vec3;\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/ray.ts",
+          "name": "./src/ray.ts",
+          "index": 4,
+          "index2": 3,
+          "size": 489,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+          ],
+          "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+          "issuerId": null,
+          "issuerName": "./src/main.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "name": "./src/main.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [
+          ],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/lambertian.ts",
+              "module": "./src/lambertian.ts",
+              "moduleName": "./src/lambertian.ts",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./ray",
+              "loc": "1:0-24"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+              "module": "./src/camera.ts",
+              "moduleName": "./src/camera.ts",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./ray",
+              "loc": "2:0-24"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+              "module": "./src/metal.ts",
+              "moduleName": "./src/metal.ts",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./ray",
+              "loc": "2:0-24"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./ray",
+              "loc": "3:0-24"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/lambertian.ts",
+              "module": "./src/lambertian.ts",
+              "moduleName": "./src/lambertian.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./ray",
+              "loc": "10:8-11"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+              "module": "./src/metal.ts",
+              "moduleName": "./src/metal.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./ray",
+              "loc": "10:8-11"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/lambertian.ts",
+              "module": "./src/lambertian.ts",
+              "moduleName": "./src/lambertian.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./ray",
+              "loc": "10:33-36"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+              "module": "./src/metal.ts",
+              "moduleName": "./src/metal.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./ray",
+              "loc": "10:33-36"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+              "module": "./src/camera.ts",
+              "moduleName": "./src/camera.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./ray",
+              "loc": "18:19-22"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./ray",
+              "loc": "21:24-27"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [
+          ],
+          "depth": 1,
+          "source": "import Vec3 from './vec3';\nvar Ray = /** @class */ (function () {\n    function Ray(a, b) {\n        this.origin = a ? new Vec3(a) : Vec3.zeros();\n        this.direction = b ? new Vec3(b) : Vec3.zeros();\n    }\n    Ray.prototype.at = function (t) {\n        return this.direction.scale(t).add(this.origin);\n    };\n    Ray.clone = function (dst, src) {\n        dst.origin = new Vec3(src.origin);\n        dst.direction = new Vec3(src.direction);\n    };\n    return Ray;\n}());\nexport default Ray;\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable.ts",
+          "name": "./src/hittable.ts",
+          "index": 5,
+          "index2": 4,
+          "size": 617,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+          ],
+          "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+          "issuerId": null,
+          "issuerName": "./src/main.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "name": "./src/main.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [
+          ],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable-list.ts",
+              "module": "./src/hittable-list.ts",
+              "moduleName": "./src/hittable-list.ts",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./hittable",
+              "loc": "1:0-35"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./hittable",
+              "loc": "4:0-35"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable-list.ts",
+              "module": "./src/hittable-list.ts",
+              "moduleName": "./src/hittable-list.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./hittable",
+              "loc": "7:26-35"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./hittable",
+              "loc": "14:16-25"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable-list.ts",
+              "module": "./src/hittable-list.ts",
+              "moduleName": "./src/hittable-list.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./hittable",
+              "loc": "15:16-25"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [
+          ],
+          "depth": 1,
+          "source": "import Vec3 from './vec3';\nvar HitRecord = /** @class */ (function () {\n    function HitRecord() {\n    }\n    HitRecord.prototype.setFaceNormal = function (ray, outwardNormal) {\n        this.isFrontFace = Vec3.dot(ray.direction, outwardNormal) < 0;\n        this.normal = this.isFrontFace ? outwardNormal : outwardNormal.neg();\n    };\n    HitRecord.clone = function (dst, src) {\n        dst.p = new Vec3(src.p);\n        dst.normal = new Vec3(src.normal);\n        dst.t = src.t;\n        dst.isFrontFace = src.isFrontFace;\n        dst.material = src.material;\n    };\n    return HitRecord;\n}());\nexport default HitRecord;\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/hittable-list.ts",
+          "name": "./src/hittable-list.ts",
+          "index": 6,
+          "index2": 5,
+          "size": 930,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+          ],
+          "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+          "issuerId": null,
+          "issuerName": "./src/main.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "name": "./src/main.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [
+          ],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./hittable-list",
+              "loc": "5:0-43"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./hittable-list",
+              "loc": "43:18-30"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [
+          ],
+          "depth": 1,
+          "source": "import HitRecord from './hittable';\nvar HittableList = /** @class */ (function () {\n    function HittableList() {\n        this.hittableObjects = [];\n    }\n    HittableList.prototype.hit = function (ray, t_min, t_max, rec) {\n        var tempRec = new HitRecord();\n        var hitAnything = false;\n        var closestSoFar = t_max;\n        for (var _i = 0, _a = this.hittableObjects; _i < _a.length; _i++) {\n            var obj = _a[_i];\n            if (obj.hit(ray, t_min, closestSoFar, tempRec)) {\n                hitAnything = true;\n                closestSoFar = tempRec.t;\n                HitRecord.clone(rec, tempRec);\n            }\n        }\n        return hitAnything;\n    };\n    HittableList.prototype.clear = function () {\n        this.hittableObjects = [];\n    };\n    HittableList.prototype.add = function (obj) {\n        this.hittableObjects.push(obj);\n    };\n    return HittableList;\n}());\nexport default HittableList;\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/sphere.ts",
+          "name": "./src/sphere.ts",
+          "index": 7,
+          "index2": 6,
+          "size": 1270,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+          ],
+          "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+          "issuerId": null,
+          "issuerName": "./src/main.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "name": "./src/main.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [
+          ],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./sphere",
+              "loc": "6:0-30"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./sphere",
+              "loc": "48:16-22"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./sphere",
+              "loc": "49:16-22"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./sphere",
+              "loc": "50:16-22"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./sphere",
+              "loc": "51:16-22"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [
+          ],
+          "depth": 1,
+          "source": "import Vec3 from './vec3';\nvar Sphere = /** @class */ (function () {\n    function Sphere(a, b, material) {\n        this.center = a ? a : new Vec3(a);\n        this.radius = b ? b : 1;\n        this.material = material ? material : undefined;\n    }\n    Sphere.prototype.hit = function (ray, t_min, t_max, recOut) {\n        var oc = ray.origin.sub(this.center);\n        var a = Vec3.dot(ray.direction, ray.direction);\n        var halfb = Vec3.dot(oc, ray.direction);\n        var c = Vec3.dot(oc, oc) - this.radius * this.radius;\n        var discriminant = halfb * halfb - a * c;\n        if (discriminant > 0) {\n            var root = Math.sqrt(discriminant);\n            var ts = [(-halfb - root) / a, (-halfb + root) / a];\n            for (var _i = 0, ts_1 = ts; _i < ts_1.length; _i++) {\n                var t = ts_1[_i];\n                if (t < t_max && t > t_min) {\n                    recOut.t = t;\n                    recOut.p = new Vec3(ray.at(recOut.t));\n                    recOut.setFaceNormal(ray, new Vec3((recOut.p.sub(this.center)).divide(this.radius)));\n                    recOut.material = this.material;\n                    return true;\n                }\n            }\n        }\n        return false;\n    };\n    return Sphere;\n}());\nexport default Sphere;\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+          "name": "./src/camera.ts",
+          "index": 8,
+          "index2": 7,
+          "size": 929,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+          ],
+          "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+          "issuerId": null,
+          "issuerName": "./src/main.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "name": "./src/main.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [
+          ],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./camera",
+              "loc": "7:0-30"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./camera",
+              "loc": "41:19-25"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [
+          ],
+          "depth": 1,
+          "source": "import Vec3 from './vec3';\nimport Ray from './ray';\nvar Camera = /** @class */ (function () {\n    function Camera(aspectRatio) {\n        this.aspectRatio = aspectRatio;\n        this.viewportHeight = 2.0;\n        this.viewportWidth = aspectRatio * this.viewportHeight;\n        this.focalLength = 1.0;\n        this.origin = new Vec3(0, 0, 0);\n        this.horizontal = new Vec3(this.viewportWidth, 0, 0);\n        this.vertical = new Vec3(0, this.viewportHeight, 0);\n        this.lowerLeftCorner = this.origin\n            .sub(this.horizontal.scale(0.5))\n            .sub(this.vertical.scale(0.5))\n            .sub(new Vec3(0, 0, this.focalLength));\n    }\n    Camera.prototype.getRay = function (u, v) {\n        return new Ray(this.origin, this.lowerLeftCorner\n            .add(this.horizontal.scale(u))\n            .add(this.vertical.scale(v))\n            .sub(this.origin));\n    };\n    return Camera;\n}());\nexport default Camera;\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/lambertian.ts",
+          "name": "./src/lambertian.ts",
+          "index": 9,
+          "index2": 8,
+          "size": 545,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+          ],
+          "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+          "issuerId": null,
+          "issuerName": "./src/main.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "name": "./src/main.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [
+          ],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./lambertian",
+              "loc": "9:0-38"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./lambertian",
+              "loc": "44:27-37"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./lambertian",
+              "loc": "45:27-37"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [
+          ],
+          "depth": 1,
+          "source": "import Ray from './ray';\nimport Vec3 from './vec3';\nimport Utils from './utils';\nvar Lambertian = /** @class */ (function () {\n    function Lambertian(color) {\n        this.albedo = color;\n    }\n    Lambertian.prototype.scatter = function (rayIn, rec, attenuation, scattered) {\n        var scatterDirection = rec.normal.add(Utils.randomUnitVector());\n        Ray.clone(scattered, new Ray(rec.p, scatterDirection));\n        Vec3.clone(attenuation, this.albedo);\n        return true;\n    };\n    return Lambertian;\n}());\nexport default Lambertian;\n"
+        },
+        {
+          "id": null,
+          "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+          "name": "./src/metal.ts",
+          "index": 10,
+          "index2": 9,
+          "size": 563,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+          ],
+          "issuer": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+          "issuerId": null,
+          "issuerName": "./src/main.js",
+          "issuerPath": [
+            {
+              "id": null,
+              "identifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "name": "./src/main.js"
+            }
+          ],
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "assets": [
+          ],
+          "reasons": [
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./metal",
+              "loc": "10:0-28"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./metal",
+              "loc": "46:25-30"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./metal",
+              "loc": "47:26-31"
+            }
+          ],
+          "usedExports": [
+            "default"
+          ],
+          "providedExports": [
+            "default"
+          ],
+          "optimizationBailout": [
+          ],
+          "depth": 1,
+          "source": "import Vec3 from './vec3';\nimport Ray from './ray';\nimport Utils from './utils';\nvar Metal = /** @class */ (function () {\n    function Metal(color) {\n        this.albedo = color;\n    }\n    Metal.prototype.scatter = function (rayIn, rec, attenuation, scattered) {\n        var reflected = Utils.reflect(Vec3.uniform(rayIn.direction), rec.normal);\n        Ray.clone(scattered, new Ray(rec.p, reflected));\n        Vec3.clone(attenuation, this.albedo);\n        return Vec3.dot(scattered.direction, rec.normal) > 0;\n    };\n    return Metal;\n}());\nexport default Metal;\n"
+        }
+      ],
+      "filteredModules": 0
+    }
+  ],
+  "filteredModules": 0,
+  "logging": {
+    "webpack.buildChunkGraph.visitModules": {
+      "entries": [
+      ],
+      "filteredEntries": 2,
+      "debug": false
+    },
+    "copy-webpack-plugin": {
+      "entries": [
+        {
+          "type": "log",
+          "message": "begin globbing '/Users/zenandong/WebstormProjects/ray-tracing/public/**/*' with a context of '/Users/zenandong/WebstormProjects/ray-tracing/public'"
+        },
+        {
+          "type": "log",
+          "message": "determined that '/Users/zenandong/WebstormProjects/ray-tracing/public/favicon.ico' should write to 'favicon.ico'"
+        },
+        {
+          "type": "log",
+          "message": "determined that '/Users/zenandong/WebstormProjects/ray-tracing/public/index.html' should write to 'index.html'"
+        },
+        {
+          "type": "log",
+          "message": "determined that '/Users/zenandong/WebstormProjects/ray-tracing/public/toji-gl-matrix-v3.3.0-14-gd50931b.tar.gz' should write to 'toji-gl-matrix-v3.3.0-14-gd50931b.tar.gz'"
+        },
+        {
+          "type": "log",
+          "message": "determined that '/Users/zenandong/WebstormProjects/ray-tracing/public/styles/index.css' should write to 'styles/index.css'"
+        },
+        {
+          "type": "log",
+          "message": "writing 'favicon.ico' to compilation assets from '/Users/zenandong/WebstormProjects/ray-tracing/public/favicon.ico'"
+        },
+        {
+          "type": "log",
+          "message": "writing 'index.html' to compilation assets from '/Users/zenandong/WebstormProjects/ray-tracing/public/index.html'"
+        },
+        {
+          "type": "log",
+          "message": "writing 'toji-gl-matrix-v3.3.0-14-gd50931b.tar.gz' to compilation assets from '/Users/zenandong/WebstormProjects/ray-tracing/public/toji-gl-matrix-v3.3.0-14-gd50931b.tar.gz'"
+        },
+        {
+          "type": "log",
+          "message": "writing 'styles/index.css' to compilation assets from '/Users/zenandong/WebstormProjects/ray-tracing/public/styles/index.css'"
+        }
+      ],
+      "filteredEntries": 14,
+      "debug": false
+    }
+  },
+  "children": [
+  ]
+}
