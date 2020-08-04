@@ -4,9 +4,9 @@
   "warnings": [
   ],
   "version": "4.44.1",
-  "hash": "80f171fe102a2b628aa1",
-  "time": 2403,
-  "builtAt": 1596535127824,
+  "hash": "614e2cc420868ea4865b",
+  "time": 2505,
+  "builtAt": 1596536084879,
   "publicPath": "",
   "outputPath": "/Users/zenandong/WebstormProjects/ray-tracing/docs",
   "assetsByChunkName": {
@@ -48,7 +48,7 @@
     },
     {
       "name": "render.js",
-      "size": 8927,
+      "size": 9229,
       "chunks": [
         0
       ],
@@ -106,14 +106,14 @@
       "rendered": true,
       "initial": true,
       "entry": true,
-      "size": 17743,
+      "size": 18553,
       "names": [
         "main"
       ],
       "files": [
         "render.js"
       ],
-      "hash": "7bf6aa32014acf91c0d5",
+      "hash": "75de9b812e614ab46eea",
       "siblings": [
       ],
       "parents": [
@@ -129,7 +129,7 @@
           "name": "./src/main.js + 11 modules",
           "index": 0,
           "index2": 11,
-          "size": 17743,
+          "size": 18553,
           "cacheable": true,
           "built": true,
           "optional": false,
@@ -170,7 +170,7 @@
               "name": "./src/main.js",
               "index": 0,
               "index2": 11,
-              "size": 3558,
+              "size": 3490,
               "cacheable": true,
               "built": true,
               "optional": false,
@@ -204,7 +204,7 @@
                 "ModuleConcatenation bailout: Module is an entry point"
               ],
               "depth": 0,
-              "source": "import Image from './image';\nimport Vec3 from './vec3';\nimport Ray from './ray';\nimport HitRecord from './hittable';\nimport HittableList from './hittable-list';\nimport Sphere from './sphere';\nimport Camera from './camera';\nimport Utils from './utils';\nimport Lambertian from './lambertian';\nimport Metal from './metal';\nimport Dialectric from \"./dialectric\";\n\nfunction rayColor(ray, world, depth) {\n  if (depth <= 0) return Vec3.zeros();\n  var rec = new HitRecord();\n\n  if (world.hit(ray, 1e-5, Infinity, rec)) {\n    // const target = rec.p.add(rec.normal).add(Utils.randomInUnitSphere());\n    // const target = rec.p.add(rec.normal).add(Utils.randomUnitVector());\n    // const target = rec.p.add(Utils.randomUnitVector(rec.normal));\n    // return rayColor(new Ray(rec.p, target.sub(rec.p)), world, depth-1).scale(0.5);\n    var scattered = new Ray();\n    var attenuation = Vec3.zeros();\n    if (rec.material.scatter(ray, rec, attenuation, scattered)) return attenuation.mul(rayColor(scattered, world, depth - 1));\n    return new Vec3(0, 0, 0);\n  }\n\n  var unit = Vec3.uniform(ray.direction);\n  var t = 0.5 * (unit.y + 1.0);\n  return new Vec3(1.0, 1.0, 1.0).scale(1 - t).add(new Vec3(0.5, 0.7, 1.0).scale(t));\n}\n\nfunction drawImage(canvas, ctx) {\n  var samplesPerPixel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;\n  var maxDepth = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 50;\n  // create image buffer\n  var width = canvas.width;\n  var height = canvas.height;\n  var aspectRatio = width / height;\n  var image = new Image(width, height); // setup camera\n\n  var camera = new Camera(aspectRatio); // setup world\n\n  var world = new HittableList();\n  var materialGround = new Lambertian(new Vec3(0.8, 0.8, 0.0));\n  var materialCenter = new Lambertian(new Vec3(0.7, 0.3, 0.3)); // const materialLeft   = new Metal(new Vec3(0.8, 0.8, 0.8), 0.3);\n\n  var materialLeft = new Dialectric(1.5);\n  var materialRight = new Metal(new Vec3(0.8, 0.6, 0.2), 1.0);\n  world.add(new Sphere(new Vec3(0.0, -100.5, -1.0), 100.0, materialGround));\n  world.add(new Sphere(new Vec3(0.0, 0.0, -1.0), 0.5, materialCenter));\n  world.add(new Sphere(new Vec3(-1.0, 0.0, -1.0), 0.5, materialLeft));\n  world.add(new Sphere(new Vec3(1.0, 0.0, -1.0), 0.5, materialRight)); // render\n\n  for (var i = 0; i < width; ++i) {\n    for (var j = 0; j < height; ++j) {\n      var sampleColors = [];\n\n      for (var s = 0; s < samplesPerPixel; ++s) {\n        var u = (i + Utils.random()) / (width - 1);\n        var v = (j + Utils.random()) / (height - 1);\n        var ray = camera.getRay(u, v);\n        sampleColors.push(rayColor(ray, world, maxDepth));\n      } // ImageData's origin is on top left corner\n\n\n      image.setPixel(i, height - j - 1, Utils.sampleColor(sampleColors));\n    }\n  } // draw image\n\n\n  ctx.putImageData(image.imageData, 0, 0);\n}\n\nfunction render() {\n  var canvas = document.querySelector('#canvas');\n\n  if (!canvas.getContext) {\n    console.log('Canvas is not supported in this browser!');\n    return;\n  }\n\n  var ctx = canvas.getContext('2d');\n  var samplesPerPixel = document.querySelector('#spp').value;\n  var depth = document.querySelector('#depth').value;\n  samplesPerPixel = samplesPerPixel ? samplesPerPixel : 4;\n  depth = depth ? depth : 50;\n  console.log('Canvas size:', canvas.width, canvas.height);\n  console.log('Samples/Pixel:', samplesPerPixel);\n  console.log('Depth:', depth);\n  return new Promise(function (resolve) {\n    drawImage(canvas, ctx, samplesPerPixel, depth);\n    resolve();\n  });\n}\n\nwindow.render = render;"
+              "source": "import Image from './image';\nimport Vec3 from './vec3';\nimport Ray from './ray';\nimport HitRecord from './hittable';\nimport HittableList from './hittable-list';\nimport Sphere from './sphere';\nimport Camera from './camera';\nimport Utils from './utils';\nimport Lambertian from './lambertian';\nimport Metal from './metal';\nimport Dialectric from \"./dialectric\";\n\nfunction rayColor(ray, world, depth) {\n  if (depth <= 0) return Vec3.zeros();\n  var rec = new HitRecord();\n\n  if (world.hit(ray, 1e-5, Infinity, rec)) {\n    // const target = rec.p.add(rec.normal).add(Utils.randomInUnitSphere());\n    // const target = rec.p.add(rec.normal).add(Utils.randomUnitVector());\n    // const target = rec.p.add(Utils.randomUnitVector(rec.normal));\n    // return rayColor(new Ray(rec.p, target.sub(rec.p)), world, depth-1).scale(0.5);\n    var scattered = new Ray();\n    var attenuation = Vec3.zeros();\n    if (rec.material.scatter(ray, rec, attenuation, scattered)) return attenuation.mul(rayColor(scattered, world, depth - 1));\n    return new Vec3(0, 0, 0);\n  }\n\n  var unit = Vec3.uniform(ray.direction);\n  var t = 0.5 * (unit.y + 1.0);\n  return new Vec3(1.0, 1.0, 1.0).scale(1 - t).add(new Vec3(0.5, 0.7, 1.0).scale(t));\n}\n\nfunction drawImage(canvas, ctx) {\n  var samplesPerPixel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;\n  var maxDepth = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 50;\n  // create image buffer\n  var width = canvas.width;\n  var height = canvas.height;\n  var aspectRatio = width / height;\n  var image = new Image(width, height); // setup camera\n\n  var camera = new Camera(aspectRatio); // setup world\n\n  var world = new HittableList();\n  var materialGround = new Lambertian(new Vec3(0.8, 0.8, 0.0));\n  var materialCenter = new Lambertian(new Vec3(0.1, 0.2, 0.5));\n  var materialLeft = new Dialectric(1.5);\n  var materialRight = new Metal(new Vec3(0.8, 0.6, 0.2), 1.0);\n  world.add(new Sphere(new Vec3(0.0, -100.5, -1.0), 100.0, materialGround));\n  world.add(new Sphere(new Vec3(0.0, 0.0, -1.0), 0.5, materialCenter));\n  world.add(new Sphere(new Vec3(-1.0, 0.0, -1.0), 0.5, materialLeft));\n  world.add(new Sphere(new Vec3(1.0, 0.0, -1.0), 0.5, materialRight)); // render\n\n  for (var i = 0; i < width; ++i) {\n    for (var j = 0; j < height; ++j) {\n      var sampleColors = [];\n\n      for (var s = 0; s < samplesPerPixel; ++s) {\n        var u = (i + Utils.random()) / (width - 1);\n        var v = (j + Utils.random()) / (height - 1);\n        var ray = camera.getRay(u, v);\n        sampleColors.push(rayColor(ray, world, maxDepth));\n      } // ImageData's origin is on top left corner\n\n\n      image.setPixel(i, height - j - 1, Utils.sampleColor(sampleColors));\n    }\n  } // draw image\n\n\n  ctx.putImageData(image.imageData, 0, 0);\n}\n\nfunction render() {\n  var canvas = document.querySelector('#canvas');\n\n  if (!canvas.getContext) {\n    console.log('Canvas is not supported in this browser!');\n    return;\n  }\n\n  var ctx = canvas.getContext('2d');\n  var samplesPerPixel = document.querySelector('#spp').value;\n  var depth = document.querySelector('#depth').value;\n  samplesPerPixel = samplesPerPixel ? samplesPerPixel : 4;\n  depth = depth ? depth : 50;\n  console.log('Canvas size:', canvas.width, canvas.height);\n  console.log('Samples/Pixel:', samplesPerPixel);\n  console.log('Depth:', depth);\n  return new Promise(function (resolve) {\n    drawImage(canvas, ctx, samplesPerPixel, depth);\n    resolve();\n  });\n}\n\nwindow.render = render;"
             },
             {
               "id": null,
@@ -271,7 +271,7 @@
               "name": "./src/utils.ts",
               "index": 3,
               "index2": 1,
-              "size": 2081,
+              "size": 2260,
               "cacheable": true,
               "built": true,
               "optional": false,
@@ -373,7 +373,34 @@
                   "moduleName": "./src/dialectric.ts",
                   "type": "harmony import specifier",
                   "userRequest": "./utils",
-                  "loc": "12:24-29"
+                  "loc": "15:28-33"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+                  "module": "./src/dialectric.ts",
+                  "moduleName": "./src/dialectric.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "20:26-31"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+                  "module": "./src/dialectric.ts",
+                  "moduleName": "./src/dialectric.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "21:12-17"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+                  "module": "./src/dialectric.ts",
+                  "moduleName": "./src/dialectric.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "22:28-33"
                 },
                 {
                   "moduleId": null,
@@ -431,6 +458,24 @@
                 },
                 {
                   "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+                  "module": "./src/dialectric.ts",
+                  "moduleName": "./src/dialectric.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "27:24-29"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./utils",
+                  "loc": "59:21-26"
+                },
+                {
+                  "moduleId": null,
                   "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
                   "module": "./src/main.js",
                   "moduleName": "./src/main.js",
@@ -445,16 +490,7 @@
                   "moduleName": "./src/main.js",
                   "type": "harmony import specifier",
                   "userRequest": "./utils",
-                  "loc": "61:21-26"
-                },
-                {
-                  "moduleId": null,
-                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
-                  "module": "./src/main.js",
-                  "moduleName": "./src/main.js",
-                  "type": "harmony import specifier",
-                  "userRequest": "./utils",
-                  "loc": "67:40-45"
+                  "loc": "66:40-45"
                 }
               ],
               "usedExports": [
@@ -466,7 +502,7 @@
               "optimizationBailout": [
               ],
               "depth": 1,
-              "source": "import Vec3 from './vec3';\nvar Utils = /** @class */ (function () {\n    function Utils() {\n    }\n    Utils.degreeToRadians = function (degree) {\n        return degree * Math.PI / 180;\n    };\n    Utils.random = function (a, b) {\n        return a ? (b - a) * Math.random() + a : Math.random();\n    };\n    Utils.clamp = function (x, min, max) {\n        return Math.min(Math.max(x, min), max);\n    };\n    Utils.sampleColor = function (samples) {\n        var samplesPerPixel = samples.length;\n        var pixelColor = new Vec3(0, 0, 0);\n        for (var _i = 0, samples_1 = samples; _i < samples_1.length; _i++) {\n            var sample = samples_1[_i];\n            pixelColor = pixelColor.add(sample);\n        }\n        pixelColor = pixelColor.scale(1.0 / samplesPerPixel);\n        pixelColor = pixelColor\n            .apply(Math.sqrt)\n            .apply(function (x) { return Utils.clamp(x, 0, 0.99999); });\n        return pixelColor.scale(256);\n    };\n    Utils.randomInUnitSphere = function () {\n        while (true) {\n            var p = Vec3.random(-1, 1);\n            if (p.magnitude() >= 1.0)\n                continue;\n            return p;\n        }\n    };\n    Utils.randomUnitVector = function () {\n        var a = Utils.random(0, 2 * Math.PI);\n        var z = Utils.random(-1, 1);\n        var r = Math.sqrt(1 - z * z);\n        return new Vec3(r * Math.cos(a), r * Math.sin(a), z);\n    };\n    Utils.randomInHemisphere = function (normal) {\n        var v = Utils.randomInUnitSphere();\n        if (Vec3.dot(v, normal) > 0.0)\n            return v;\n        else\n            return v.neg();\n    };\n    Utils.reflect = function (v, n) {\n        return v.sub(n.scale(2 * Vec3.dot(v, n)));\n    };\n    Utils.refract = function (v, n, refractionRate) {\n        var cosTheta = Vec3.dot(v.neg(), n);\n        var rayOutPerp = (v.add(n.scale(cosTheta))).scale(refractionRate);\n        var rayOutParallel = n.scale(-Math.sqrt(Math.abs(1 - rayOutPerp.magnitude() * rayOutPerp.magnitude())));\n        return rayOutPerp.add(rayOutParallel);\n    };\n    return Utils;\n}());\nexport default Utils;\n"
+              "source": "import Vec3 from './vec3';\nvar Utils = /** @class */ (function () {\n    function Utils() {\n    }\n    Utils.degreeToRadians = function (degree) {\n        return degree * Math.PI / 180;\n    };\n    Utils.random = function (a, b) {\n        return a ? (b - a) * Math.random() + a : Math.random();\n    };\n    Utils.clamp = function (x, min, max) {\n        return Math.min(Math.max(x, min), max);\n    };\n    Utils.sampleColor = function (samples) {\n        var samplesPerPixel = samples.length;\n        var pixelColor = new Vec3(0, 0, 0);\n        for (var _i = 0, samples_1 = samples; _i < samples_1.length; _i++) {\n            var sample = samples_1[_i];\n            pixelColor = pixelColor.add(sample);\n        }\n        pixelColor = pixelColor.scale(1.0 / samplesPerPixel);\n        pixelColor = pixelColor\n            .apply(Math.sqrt)\n            .apply(function (x) { return Utils.clamp(x, 0, 0.99999); });\n        return pixelColor.scale(256);\n    };\n    Utils.randomInUnitSphere = function () {\n        while (true) {\n            var p = Vec3.random(-1, 1);\n            if (p.magnitude() >= 1.0)\n                continue;\n            return p;\n        }\n    };\n    Utils.randomUnitVector = function () {\n        var a = Utils.random(0, 2 * Math.PI);\n        var z = Utils.random(-1, 1);\n        var r = Math.sqrt(1 - z * z);\n        return new Vec3(r * Math.cos(a), r * Math.sin(a), z);\n    };\n    Utils.randomInHemisphere = function (normal) {\n        var v = Utils.randomInUnitSphere();\n        if (Vec3.dot(v, normal) > 0.0)\n            return v;\n        else\n            return v.neg();\n    };\n    Utils.reflect = function (v, n) {\n        return v.sub(n.scale(2 * Vec3.dot(v, n)));\n    };\n    Utils.refract = function (v, n, refractionRate) {\n        var cosTheta = Vec3.dot(v.neg(), n);\n        var rayOutPerp = (v.add(n.scale(cosTheta))).scale(refractionRate);\n        var rayOutParallel = n.scale(-Math.sqrt(Math.abs(1 - rayOutPerp.magnitude() * rayOutPerp.magnitude())));\n        return rayOutPerp.add(rayOutParallel);\n    };\n    Utils.schlick = function (cosine, refIdx) {\n        var r0 = (1 - refIdx) / (1 + refIdx);\n        r0 = r0 * r0;\n        return r0 + (1 - r0) * Math.pow(1 - cosine, 5);\n    };\n    return Utils;\n}());\nexport default Utils;\n"
             },
             {
               "id": null,
@@ -526,6 +562,15 @@
                 },
                 {
                   "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+                  "module": "./src/metal.ts",
+                  "moduleName": "./src/metal.ts",
+                  "type": "harmony side effect evaluation",
+                  "userRequest": "./vec3",
+                  "loc": "1:0-26"
+                },
+                {
+                  "moduleId": null,
                   "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
                   "module": "./src/camera.ts",
                   "moduleName": "./src/camera.ts",
@@ -538,15 +583,6 @@
                   "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
                   "module": "./src/utils.ts",
                   "moduleName": "./src/utils.ts",
-                  "type": "harmony side effect evaluation",
-                  "userRequest": "./vec3",
-                  "loc": "1:0-26"
-                },
-                {
-                  "moduleId": null,
-                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
-                  "module": "./src/metal.ts",
-                  "moduleName": "./src/metal.ts",
                   "type": "harmony side effect evaluation",
                   "userRequest": "./vec3",
                   "loc": "1:0-26"
@@ -778,6 +814,15 @@
                 },
                 {
                   "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+                  "module": "./src/dialectric.ts",
+                  "moduleName": "./src/dialectric.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "12:32-36"
+                },
+                {
+                  "moduleId": null,
                   "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
                   "module": "./src/metal.ts",
                   "moduleName": "./src/metal.ts",
@@ -922,12 +967,12 @@
                 },
                 {
                   "moduleId": null,
-                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
-                  "module": "./src/utils.ts",
-                  "moduleName": "./src/utils.ts",
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
                   "type": "harmony import specifier",
                   "userRequest": "./vec3",
-                  "loc": "49:33-37"
+                  "loc": "48:36-40"
                 },
                 {
                   "moduleId": null,
@@ -936,7 +981,16 @@
                   "moduleName": "./src/main.js",
                   "type": "harmony import specifier",
                   "userRequest": "./vec3",
-                  "loc": "49:36-40"
+                  "loc": "49:27-31"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
+                  "module": "./src/utils.ts",
+                  "moduleName": "./src/utils.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./vec3",
+                  "loc": "49:33-37"
                 },
                 {
                   "moduleId": null,
@@ -973,15 +1027,6 @@
                   "type": "harmony import specifier",
                   "userRequest": "./vec3",
                   "loc": "52:27-31"
-                },
-                {
-                  "moduleId": null,
-                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
-                  "module": "./src/main.js",
-                  "moduleName": "./src/main.js",
-                  "type": "harmony import specifier",
-                  "userRequest": "./vec3",
-                  "loc": "53:27-31"
                 }
               ],
               "usedExports": [
@@ -1044,18 +1089,18 @@
                 },
                 {
                   "moduleId": null,
-                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
-                  "module": "./src/camera.ts",
-                  "moduleName": "./src/camera.ts",
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+                  "module": "./src/metal.ts",
+                  "moduleName": "./src/metal.ts",
                   "type": "harmony side effect evaluation",
                   "userRequest": "./ray",
                   "loc": "2:0-24"
                 },
                 {
                   "moduleId": null,
-                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
-                  "module": "./src/metal.ts",
-                  "moduleName": "./src/metal.ts",
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+                  "module": "./src/camera.ts",
+                  "moduleName": "./src/camera.ts",
                   "type": "harmony side effect evaluation",
                   "userRequest": "./ray",
                   "loc": "2:0-24"
@@ -1112,7 +1157,7 @@
                   "moduleName": "./src/dialectric.ts",
                   "type": "harmony import specifier",
                   "userRequest": "./ray",
-                  "loc": "13:8-11"
+                  "loc": "16:12-15"
                 },
                 {
                   "moduleId": null,
@@ -1121,7 +1166,7 @@
                   "moduleName": "./src/dialectric.ts",
                   "type": "harmony import specifier",
                   "userRequest": "./ray",
-                  "loc": "13:33-36"
+                  "loc": "16:37-40"
                 },
                 {
                   "moduleId": null,
@@ -1140,6 +1185,42 @@
                   "type": "harmony import specifier",
                   "userRequest": "./ray",
                   "loc": "22:24-27"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+                  "module": "./src/dialectric.ts",
+                  "moduleName": "./src/dialectric.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./ray",
+                  "loc": "23:12-15"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+                  "module": "./src/dialectric.ts",
+                  "moduleName": "./src/dialectric.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./ray",
+                  "loc": "23:37-40"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+                  "module": "./src/dialectric.ts",
+                  "moduleName": "./src/dialectric.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./ray",
+                  "loc": "28:8-11"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+                  "module": "./src/dialectric.ts",
+                  "moduleName": "./src/dialectric.ts",
+                  "type": "harmony import specifier",
+                  "userRequest": "./ray",
+                  "loc": "28:33-36"
                 }
               ],
               "usedExports": [
@@ -1343,6 +1424,15 @@
                   "moduleName": "./src/main.js",
                   "type": "harmony import specifier",
                   "userRequest": "./sphere",
+                  "loc": "49:16-22"
+                },
+                {
+                  "moduleId": null,
+                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+                  "module": "./src/main.js",
+                  "moduleName": "./src/main.js",
+                  "type": "harmony import specifier",
+                  "userRequest": "./sphere",
                   "loc": "50:16-22"
                 },
                 {
@@ -1362,15 +1452,6 @@
                   "type": "harmony import specifier",
                   "userRequest": "./sphere",
                   "loc": "52:16-22"
-                },
-                {
-                  "moduleId": null,
-                  "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
-                  "module": "./src/main.js",
-                  "moduleName": "./src/main.js",
-                  "type": "harmony import specifier",
-                  "userRequest": "./sphere",
-                  "loc": "53:16-22"
                 }
               ],
               "usedExports": [
@@ -1556,7 +1637,7 @@
                   "moduleName": "./src/main.js",
                   "type": "harmony import specifier",
                   "userRequest": "./metal",
-                  "loc": "49:26-31"
+                  "loc": "48:26-31"
                 }
               ],
               "usedExports": [
@@ -1576,7 +1657,7 @@
               "name": "./src/dialectric.ts",
               "index": 11,
               "index2": 10,
-              "size": 696,
+              "size": 1395,
               "cacheable": true,
               "built": true,
               "optional": false,
@@ -1615,7 +1696,7 @@
                   "moduleName": "./src/main.js",
                   "type": "harmony import specifier",
                   "userRequest": "./dialectric",
-                  "loc": "48:25-35"
+                  "loc": "47:25-35"
                 }
               ],
               "usedExports": [
@@ -1627,7 +1708,7 @@
               "optimizationBailout": [
               ],
               "depth": 1,
-              "source": "import Ray from './ray';\nimport Vec3 from './vec3';\nimport Utils from './utils';\nvar Dialectric = /** @class */ (function () {\n    function Dialectric(refIdx) {\n        this.refIdx = refIdx;\n    }\n    Dialectric.prototype.scatter = function (rayIn, rec, attenuation, scattered) {\n        Vec3.clone(attenuation, new Vec3(1, 1, 1));\n        var refractionRate = rec.isFrontFace ? (1.0 / this.refIdx) : this.refIdx;\n        var unitDirection = Vec3.uniform(rayIn.direction);\n        var refracted = Utils.refract(unitDirection, rec.normal, refractionRate);\n        Ray.clone(scattered, new Ray(rec.p, refracted));\n        return true;\n    };\n    return Dialectric;\n}());\nexport default Dialectric;\n"
+              "source": "import Ray from './ray';\nimport Vec3 from './vec3';\nimport Utils from './utils';\nvar Dialectric = /** @class */ (function () {\n    function Dialectric(refIdx) {\n        this.refIdx = refIdx;\n    }\n    Dialectric.prototype.scatter = function (rayIn, rec, attenuation, scattered) {\n        Vec3.clone(attenuation, new Vec3(1, 1, 1));\n        var refractionRate = rec.isFrontFace ? (1.0 / this.refIdx) : this.refIdx;\n        var unitDirection = Vec3.uniform(rayIn.direction);\n        var cosTheta = Math.min(Vec3.dot(unitDirection.neg(), rec.normal), 1.0);\n        var sinTheta = Math.sqrt(1 - cosTheta * cosTheta);\n        if (refractionRate * sinTheta > 1.0) { // Must reflect\n            var reflacted = Utils.reflect(unitDirection, rec.normal);\n            Ray.clone(scattered, new Ray(rec.p, reflacted));\n            return true;\n        }\n        // May refract\n        var reflectProb = Utils.schlick(cosTheta, refractionRate);\n        if (Utils.random() < reflectProb) { // reflect\n            var reflacted = Utils.reflect(unitDirection, rec.normal);\n            Ray.clone(scattered, new Ray(rec.p, reflacted));\n            return true;\n        }\n        // refract\n        var refracted = Utils.refract(unitDirection, rec.normal, refractionRate);\n        Ray.clone(scattered, new Ray(rec.p, refracted));\n        return true;\n    };\n    return Dialectric;\n}());\nexport default Dialectric;\n"
             }
           ],
           "filteredModules": 0
@@ -1654,7 +1735,7 @@
       "name": "./src/main.js + 11 modules",
       "index": 0,
       "index2": 11,
-      "size": 17743,
+      "size": 18553,
       "cacheable": true,
       "built": true,
       "optional": false,
@@ -1695,7 +1776,7 @@
           "name": "./src/main.js",
           "index": 0,
           "index2": 11,
-          "size": 3558,
+          "size": 3490,
           "cacheable": true,
           "built": true,
           "optional": false,
@@ -1729,7 +1810,7 @@
             "ModuleConcatenation bailout: Module is an entry point"
           ],
           "depth": 0,
-          "source": "import Image from './image';\nimport Vec3 from './vec3';\nimport Ray from './ray';\nimport HitRecord from './hittable';\nimport HittableList from './hittable-list';\nimport Sphere from './sphere';\nimport Camera from './camera';\nimport Utils from './utils';\nimport Lambertian from './lambertian';\nimport Metal from './metal';\nimport Dialectric from \"./dialectric\";\n\nfunction rayColor(ray, world, depth) {\n  if (depth <= 0) return Vec3.zeros();\n  var rec = new HitRecord();\n\n  if (world.hit(ray, 1e-5, Infinity, rec)) {\n    // const target = rec.p.add(rec.normal).add(Utils.randomInUnitSphere());\n    // const target = rec.p.add(rec.normal).add(Utils.randomUnitVector());\n    // const target = rec.p.add(Utils.randomUnitVector(rec.normal));\n    // return rayColor(new Ray(rec.p, target.sub(rec.p)), world, depth-1).scale(0.5);\n    var scattered = new Ray();\n    var attenuation = Vec3.zeros();\n    if (rec.material.scatter(ray, rec, attenuation, scattered)) return attenuation.mul(rayColor(scattered, world, depth - 1));\n    return new Vec3(0, 0, 0);\n  }\n\n  var unit = Vec3.uniform(ray.direction);\n  var t = 0.5 * (unit.y + 1.0);\n  return new Vec3(1.0, 1.0, 1.0).scale(1 - t).add(new Vec3(0.5, 0.7, 1.0).scale(t));\n}\n\nfunction drawImage(canvas, ctx) {\n  var samplesPerPixel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;\n  var maxDepth = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 50;\n  // create image buffer\n  var width = canvas.width;\n  var height = canvas.height;\n  var aspectRatio = width / height;\n  var image = new Image(width, height); // setup camera\n\n  var camera = new Camera(aspectRatio); // setup world\n\n  var world = new HittableList();\n  var materialGround = new Lambertian(new Vec3(0.8, 0.8, 0.0));\n  var materialCenter = new Lambertian(new Vec3(0.7, 0.3, 0.3)); // const materialLeft   = new Metal(new Vec3(0.8, 0.8, 0.8), 0.3);\n\n  var materialLeft = new Dialectric(1.5);\n  var materialRight = new Metal(new Vec3(0.8, 0.6, 0.2), 1.0);\n  world.add(new Sphere(new Vec3(0.0, -100.5, -1.0), 100.0, materialGround));\n  world.add(new Sphere(new Vec3(0.0, 0.0, -1.0), 0.5, materialCenter));\n  world.add(new Sphere(new Vec3(-1.0, 0.0, -1.0), 0.5, materialLeft));\n  world.add(new Sphere(new Vec3(1.0, 0.0, -1.0), 0.5, materialRight)); // render\n\n  for (var i = 0; i < width; ++i) {\n    for (var j = 0; j < height; ++j) {\n      var sampleColors = [];\n\n      for (var s = 0; s < samplesPerPixel; ++s) {\n        var u = (i + Utils.random()) / (width - 1);\n        var v = (j + Utils.random()) / (height - 1);\n        var ray = camera.getRay(u, v);\n        sampleColors.push(rayColor(ray, world, maxDepth));\n      } // ImageData's origin is on top left corner\n\n\n      image.setPixel(i, height - j - 1, Utils.sampleColor(sampleColors));\n    }\n  } // draw image\n\n\n  ctx.putImageData(image.imageData, 0, 0);\n}\n\nfunction render() {\n  var canvas = document.querySelector('#canvas');\n\n  if (!canvas.getContext) {\n    console.log('Canvas is not supported in this browser!');\n    return;\n  }\n\n  var ctx = canvas.getContext('2d');\n  var samplesPerPixel = document.querySelector('#spp').value;\n  var depth = document.querySelector('#depth').value;\n  samplesPerPixel = samplesPerPixel ? samplesPerPixel : 4;\n  depth = depth ? depth : 50;\n  console.log('Canvas size:', canvas.width, canvas.height);\n  console.log('Samples/Pixel:', samplesPerPixel);\n  console.log('Depth:', depth);\n  return new Promise(function (resolve) {\n    drawImage(canvas, ctx, samplesPerPixel, depth);\n    resolve();\n  });\n}\n\nwindow.render = render;"
+          "source": "import Image from './image';\nimport Vec3 from './vec3';\nimport Ray from './ray';\nimport HitRecord from './hittable';\nimport HittableList from './hittable-list';\nimport Sphere from './sphere';\nimport Camera from './camera';\nimport Utils from './utils';\nimport Lambertian from './lambertian';\nimport Metal from './metal';\nimport Dialectric from \"./dialectric\";\n\nfunction rayColor(ray, world, depth) {\n  if (depth <= 0) return Vec3.zeros();\n  var rec = new HitRecord();\n\n  if (world.hit(ray, 1e-5, Infinity, rec)) {\n    // const target = rec.p.add(rec.normal).add(Utils.randomInUnitSphere());\n    // const target = rec.p.add(rec.normal).add(Utils.randomUnitVector());\n    // const target = rec.p.add(Utils.randomUnitVector(rec.normal));\n    // return rayColor(new Ray(rec.p, target.sub(rec.p)), world, depth-1).scale(0.5);\n    var scattered = new Ray();\n    var attenuation = Vec3.zeros();\n    if (rec.material.scatter(ray, rec, attenuation, scattered)) return attenuation.mul(rayColor(scattered, world, depth - 1));\n    return new Vec3(0, 0, 0);\n  }\n\n  var unit = Vec3.uniform(ray.direction);\n  var t = 0.5 * (unit.y + 1.0);\n  return new Vec3(1.0, 1.0, 1.0).scale(1 - t).add(new Vec3(0.5, 0.7, 1.0).scale(t));\n}\n\nfunction drawImage(canvas, ctx) {\n  var samplesPerPixel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;\n  var maxDepth = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 50;\n  // create image buffer\n  var width = canvas.width;\n  var height = canvas.height;\n  var aspectRatio = width / height;\n  var image = new Image(width, height); // setup camera\n\n  var camera = new Camera(aspectRatio); // setup world\n\n  var world = new HittableList();\n  var materialGround = new Lambertian(new Vec3(0.8, 0.8, 0.0));\n  var materialCenter = new Lambertian(new Vec3(0.1, 0.2, 0.5));\n  var materialLeft = new Dialectric(1.5);\n  var materialRight = new Metal(new Vec3(0.8, 0.6, 0.2), 1.0);\n  world.add(new Sphere(new Vec3(0.0, -100.5, -1.0), 100.0, materialGround));\n  world.add(new Sphere(new Vec3(0.0, 0.0, -1.0), 0.5, materialCenter));\n  world.add(new Sphere(new Vec3(-1.0, 0.0, -1.0), 0.5, materialLeft));\n  world.add(new Sphere(new Vec3(1.0, 0.0, -1.0), 0.5, materialRight)); // render\n\n  for (var i = 0; i < width; ++i) {\n    for (var j = 0; j < height; ++j) {\n      var sampleColors = [];\n\n      for (var s = 0; s < samplesPerPixel; ++s) {\n        var u = (i + Utils.random()) / (width - 1);\n        var v = (j + Utils.random()) / (height - 1);\n        var ray = camera.getRay(u, v);\n        sampleColors.push(rayColor(ray, world, maxDepth));\n      } // ImageData's origin is on top left corner\n\n\n      image.setPixel(i, height - j - 1, Utils.sampleColor(sampleColors));\n    }\n  } // draw image\n\n\n  ctx.putImageData(image.imageData, 0, 0);\n}\n\nfunction render() {\n  var canvas = document.querySelector('#canvas');\n\n  if (!canvas.getContext) {\n    console.log('Canvas is not supported in this browser!');\n    return;\n  }\n\n  var ctx = canvas.getContext('2d');\n  var samplesPerPixel = document.querySelector('#spp').value;\n  var depth = document.querySelector('#depth').value;\n  samplesPerPixel = samplesPerPixel ? samplesPerPixel : 4;\n  depth = depth ? depth : 50;\n  console.log('Canvas size:', canvas.width, canvas.height);\n  console.log('Samples/Pixel:', samplesPerPixel);\n  console.log('Depth:', depth);\n  return new Promise(function (resolve) {\n    drawImage(canvas, ctx, samplesPerPixel, depth);\n    resolve();\n  });\n}\n\nwindow.render = render;"
         },
         {
           "id": null,
@@ -1796,7 +1877,7 @@
           "name": "./src/utils.ts",
           "index": 3,
           "index2": 1,
-          "size": 2081,
+          "size": 2260,
           "cacheable": true,
           "built": true,
           "optional": false,
@@ -1898,7 +1979,34 @@
               "moduleName": "./src/dialectric.ts",
               "type": "harmony import specifier",
               "userRequest": "./utils",
-              "loc": "12:24-29"
+              "loc": "15:28-33"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+              "module": "./src/dialectric.ts",
+              "moduleName": "./src/dialectric.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "20:26-31"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+              "module": "./src/dialectric.ts",
+              "moduleName": "./src/dialectric.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "21:12-17"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+              "module": "./src/dialectric.ts",
+              "moduleName": "./src/dialectric.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "22:28-33"
             },
             {
               "moduleId": null,
@@ -1956,6 +2064,24 @@
             },
             {
               "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+              "module": "./src/dialectric.ts",
+              "moduleName": "./src/dialectric.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "27:24-29"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./utils",
+              "loc": "59:21-26"
+            },
+            {
+              "moduleId": null,
               "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
               "module": "./src/main.js",
               "moduleName": "./src/main.js",
@@ -1970,16 +2096,7 @@
               "moduleName": "./src/main.js",
               "type": "harmony import specifier",
               "userRequest": "./utils",
-              "loc": "61:21-26"
-            },
-            {
-              "moduleId": null,
-              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
-              "module": "./src/main.js",
-              "moduleName": "./src/main.js",
-              "type": "harmony import specifier",
-              "userRequest": "./utils",
-              "loc": "67:40-45"
+              "loc": "66:40-45"
             }
           ],
           "usedExports": [
@@ -1991,7 +2108,7 @@
           "optimizationBailout": [
           ],
           "depth": 1,
-          "source": "import Vec3 from './vec3';\nvar Utils = /** @class */ (function () {\n    function Utils() {\n    }\n    Utils.degreeToRadians = function (degree) {\n        return degree * Math.PI / 180;\n    };\n    Utils.random = function (a, b) {\n        return a ? (b - a) * Math.random() + a : Math.random();\n    };\n    Utils.clamp = function (x, min, max) {\n        return Math.min(Math.max(x, min), max);\n    };\n    Utils.sampleColor = function (samples) {\n        var samplesPerPixel = samples.length;\n        var pixelColor = new Vec3(0, 0, 0);\n        for (var _i = 0, samples_1 = samples; _i < samples_1.length; _i++) {\n            var sample = samples_1[_i];\n            pixelColor = pixelColor.add(sample);\n        }\n        pixelColor = pixelColor.scale(1.0 / samplesPerPixel);\n        pixelColor = pixelColor\n            .apply(Math.sqrt)\n            .apply(function (x) { return Utils.clamp(x, 0, 0.99999); });\n        return pixelColor.scale(256);\n    };\n    Utils.randomInUnitSphere = function () {\n        while (true) {\n            var p = Vec3.random(-1, 1);\n            if (p.magnitude() >= 1.0)\n                continue;\n            return p;\n        }\n    };\n    Utils.randomUnitVector = function () {\n        var a = Utils.random(0, 2 * Math.PI);\n        var z = Utils.random(-1, 1);\n        var r = Math.sqrt(1 - z * z);\n        return new Vec3(r * Math.cos(a), r * Math.sin(a), z);\n    };\n    Utils.randomInHemisphere = function (normal) {\n        var v = Utils.randomInUnitSphere();\n        if (Vec3.dot(v, normal) > 0.0)\n            return v;\n        else\n            return v.neg();\n    };\n    Utils.reflect = function (v, n) {\n        return v.sub(n.scale(2 * Vec3.dot(v, n)));\n    };\n    Utils.refract = function (v, n, refractionRate) {\n        var cosTheta = Vec3.dot(v.neg(), n);\n        var rayOutPerp = (v.add(n.scale(cosTheta))).scale(refractionRate);\n        var rayOutParallel = n.scale(-Math.sqrt(Math.abs(1 - rayOutPerp.magnitude() * rayOutPerp.magnitude())));\n        return rayOutPerp.add(rayOutParallel);\n    };\n    return Utils;\n}());\nexport default Utils;\n"
+          "source": "import Vec3 from './vec3';\nvar Utils = /** @class */ (function () {\n    function Utils() {\n    }\n    Utils.degreeToRadians = function (degree) {\n        return degree * Math.PI / 180;\n    };\n    Utils.random = function (a, b) {\n        return a ? (b - a) * Math.random() + a : Math.random();\n    };\n    Utils.clamp = function (x, min, max) {\n        return Math.min(Math.max(x, min), max);\n    };\n    Utils.sampleColor = function (samples) {\n        var samplesPerPixel = samples.length;\n        var pixelColor = new Vec3(0, 0, 0);\n        for (var _i = 0, samples_1 = samples; _i < samples_1.length; _i++) {\n            var sample = samples_1[_i];\n            pixelColor = pixelColor.add(sample);\n        }\n        pixelColor = pixelColor.scale(1.0 / samplesPerPixel);\n        pixelColor = pixelColor\n            .apply(Math.sqrt)\n            .apply(function (x) { return Utils.clamp(x, 0, 0.99999); });\n        return pixelColor.scale(256);\n    };\n    Utils.randomInUnitSphere = function () {\n        while (true) {\n            var p = Vec3.random(-1, 1);\n            if (p.magnitude() >= 1.0)\n                continue;\n            return p;\n        }\n    };\n    Utils.randomUnitVector = function () {\n        var a = Utils.random(0, 2 * Math.PI);\n        var z = Utils.random(-1, 1);\n        var r = Math.sqrt(1 - z * z);\n        return new Vec3(r * Math.cos(a), r * Math.sin(a), z);\n    };\n    Utils.randomInHemisphere = function (normal) {\n        var v = Utils.randomInUnitSphere();\n        if (Vec3.dot(v, normal) > 0.0)\n            return v;\n        else\n            return v.neg();\n    };\n    Utils.reflect = function (v, n) {\n        return v.sub(n.scale(2 * Vec3.dot(v, n)));\n    };\n    Utils.refract = function (v, n, refractionRate) {\n        var cosTheta = Vec3.dot(v.neg(), n);\n        var rayOutPerp = (v.add(n.scale(cosTheta))).scale(refractionRate);\n        var rayOutParallel = n.scale(-Math.sqrt(Math.abs(1 - rayOutPerp.magnitude() * rayOutPerp.magnitude())));\n        return rayOutPerp.add(rayOutParallel);\n    };\n    Utils.schlick = function (cosine, refIdx) {\n        var r0 = (1 - refIdx) / (1 + refIdx);\n        r0 = r0 * r0;\n        return r0 + (1 - r0) * Math.pow(1 - cosine, 5);\n    };\n    return Utils;\n}());\nexport default Utils;\n"
         },
         {
           "id": null,
@@ -2051,6 +2168,15 @@
             },
             {
               "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+              "module": "./src/metal.ts",
+              "moduleName": "./src/metal.ts",
+              "type": "harmony side effect evaluation",
+              "userRequest": "./vec3",
+              "loc": "1:0-26"
+            },
+            {
+              "moduleId": null,
               "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
               "module": "./src/camera.ts",
               "moduleName": "./src/camera.ts",
@@ -2063,15 +2189,6 @@
               "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
               "module": "./src/utils.ts",
               "moduleName": "./src/utils.ts",
-              "type": "harmony side effect evaluation",
-              "userRequest": "./vec3",
-              "loc": "1:0-26"
-            },
-            {
-              "moduleId": null,
-              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
-              "module": "./src/metal.ts",
-              "moduleName": "./src/metal.ts",
               "type": "harmony side effect evaluation",
               "userRequest": "./vec3",
               "loc": "1:0-26"
@@ -2303,6 +2420,15 @@
             },
             {
               "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+              "module": "./src/dialectric.ts",
+              "moduleName": "./src/dialectric.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "12:32-36"
+            },
+            {
+              "moduleId": null,
               "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
               "module": "./src/metal.ts",
               "moduleName": "./src/metal.ts",
@@ -2447,12 +2573,12 @@
             },
             {
               "moduleId": null,
-              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
-              "module": "./src/utils.ts",
-              "moduleName": "./src/utils.ts",
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
               "type": "harmony import specifier",
               "userRequest": "./vec3",
-              "loc": "49:33-37"
+              "loc": "48:36-40"
             },
             {
               "moduleId": null,
@@ -2461,7 +2587,16 @@
               "moduleName": "./src/main.js",
               "type": "harmony import specifier",
               "userRequest": "./vec3",
-              "loc": "49:36-40"
+              "loc": "49:27-31"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/utils.ts",
+              "module": "./src/utils.ts",
+              "moduleName": "./src/utils.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./vec3",
+              "loc": "49:33-37"
             },
             {
               "moduleId": null,
@@ -2498,15 +2633,6 @@
               "type": "harmony import specifier",
               "userRequest": "./vec3",
               "loc": "52:27-31"
-            },
-            {
-              "moduleId": null,
-              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
-              "module": "./src/main.js",
-              "moduleName": "./src/main.js",
-              "type": "harmony import specifier",
-              "userRequest": "./vec3",
-              "loc": "53:27-31"
             }
           ],
           "usedExports": [
@@ -2569,18 +2695,18 @@
             },
             {
               "moduleId": null,
-              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
-              "module": "./src/camera.ts",
-              "moduleName": "./src/camera.ts",
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
+              "module": "./src/metal.ts",
+              "moduleName": "./src/metal.ts",
               "type": "harmony side effect evaluation",
               "userRequest": "./ray",
               "loc": "2:0-24"
             },
             {
               "moduleId": null,
-              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/metal.ts",
-              "module": "./src/metal.ts",
-              "moduleName": "./src/metal.ts",
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/camera.ts",
+              "module": "./src/camera.ts",
+              "moduleName": "./src/camera.ts",
               "type": "harmony side effect evaluation",
               "userRequest": "./ray",
               "loc": "2:0-24"
@@ -2637,7 +2763,7 @@
               "moduleName": "./src/dialectric.ts",
               "type": "harmony import specifier",
               "userRequest": "./ray",
-              "loc": "13:8-11"
+              "loc": "16:12-15"
             },
             {
               "moduleId": null,
@@ -2646,7 +2772,7 @@
               "moduleName": "./src/dialectric.ts",
               "type": "harmony import specifier",
               "userRequest": "./ray",
-              "loc": "13:33-36"
+              "loc": "16:37-40"
             },
             {
               "moduleId": null,
@@ -2665,6 +2791,42 @@
               "type": "harmony import specifier",
               "userRequest": "./ray",
               "loc": "22:24-27"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+              "module": "./src/dialectric.ts",
+              "moduleName": "./src/dialectric.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./ray",
+              "loc": "23:12-15"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+              "module": "./src/dialectric.ts",
+              "moduleName": "./src/dialectric.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./ray",
+              "loc": "23:37-40"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+              "module": "./src/dialectric.ts",
+              "moduleName": "./src/dialectric.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./ray",
+              "loc": "28:8-11"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/ts-loader/index.js!/Users/zenandong/WebstormProjects/ray-tracing/src/dialectric.ts",
+              "module": "./src/dialectric.ts",
+              "moduleName": "./src/dialectric.ts",
+              "type": "harmony import specifier",
+              "userRequest": "./ray",
+              "loc": "28:33-36"
             }
           ],
           "usedExports": [
@@ -2868,6 +3030,15 @@
               "moduleName": "./src/main.js",
               "type": "harmony import specifier",
               "userRequest": "./sphere",
+              "loc": "49:16-22"
+            },
+            {
+              "moduleId": null,
+              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
+              "module": "./src/main.js",
+              "moduleName": "./src/main.js",
+              "type": "harmony import specifier",
+              "userRequest": "./sphere",
               "loc": "50:16-22"
             },
             {
@@ -2887,15 +3058,6 @@
               "type": "harmony import specifier",
               "userRequest": "./sphere",
               "loc": "52:16-22"
-            },
-            {
-              "moduleId": null,
-              "moduleIdentifier": "/Users/zenandong/WebstormProjects/ray-tracing/node_modules/babel-loader/lib/index.js??ref--4!/Users/zenandong/WebstormProjects/ray-tracing/src/main.js",
-              "module": "./src/main.js",
-              "moduleName": "./src/main.js",
-              "type": "harmony import specifier",
-              "userRequest": "./sphere",
-              "loc": "53:16-22"
             }
           ],
           "usedExports": [
@@ -3081,7 +3243,7 @@
               "moduleName": "./src/main.js",
               "type": "harmony import specifier",
               "userRequest": "./metal",
-              "loc": "49:26-31"
+              "loc": "48:26-31"
             }
           ],
           "usedExports": [
@@ -3101,7 +3263,7 @@
           "name": "./src/dialectric.ts",
           "index": 11,
           "index2": 10,
-          "size": 696,
+          "size": 1395,
           "cacheable": true,
           "built": true,
           "optional": false,
@@ -3140,7 +3302,7 @@
               "moduleName": "./src/main.js",
               "type": "harmony import specifier",
               "userRequest": "./dialectric",
-              "loc": "48:25-35"
+              "loc": "47:25-35"
             }
           ],
           "usedExports": [
@@ -3152,7 +3314,7 @@
           "optimizationBailout": [
           ],
           "depth": 1,
-          "source": "import Ray from './ray';\nimport Vec3 from './vec3';\nimport Utils from './utils';\nvar Dialectric = /** @class */ (function () {\n    function Dialectric(refIdx) {\n        this.refIdx = refIdx;\n    }\n    Dialectric.prototype.scatter = function (rayIn, rec, attenuation, scattered) {\n        Vec3.clone(attenuation, new Vec3(1, 1, 1));\n        var refractionRate = rec.isFrontFace ? (1.0 / this.refIdx) : this.refIdx;\n        var unitDirection = Vec3.uniform(rayIn.direction);\n        var refracted = Utils.refract(unitDirection, rec.normal, refractionRate);\n        Ray.clone(scattered, new Ray(rec.p, refracted));\n        return true;\n    };\n    return Dialectric;\n}());\nexport default Dialectric;\n"
+          "source": "import Ray from './ray';\nimport Vec3 from './vec3';\nimport Utils from './utils';\nvar Dialectric = /** @class */ (function () {\n    function Dialectric(refIdx) {\n        this.refIdx = refIdx;\n    }\n    Dialectric.prototype.scatter = function (rayIn, rec, attenuation, scattered) {\n        Vec3.clone(attenuation, new Vec3(1, 1, 1));\n        var refractionRate = rec.isFrontFace ? (1.0 / this.refIdx) : this.refIdx;\n        var unitDirection = Vec3.uniform(rayIn.direction);\n        var cosTheta = Math.min(Vec3.dot(unitDirection.neg(), rec.normal), 1.0);\n        var sinTheta = Math.sqrt(1 - cosTheta * cosTheta);\n        if (refractionRate * sinTheta > 1.0) { // Must reflect\n            var reflacted = Utils.reflect(unitDirection, rec.normal);\n            Ray.clone(scattered, new Ray(rec.p, reflacted));\n            return true;\n        }\n        // May refract\n        var reflectProb = Utils.schlick(cosTheta, refractionRate);\n        if (Utils.random() < reflectProb) { // reflect\n            var reflacted = Utils.reflect(unitDirection, rec.normal);\n            Ray.clone(scattered, new Ray(rec.p, reflacted));\n            return true;\n        }\n        // refract\n        var refracted = Utils.refract(unitDirection, rec.normal, refractionRate);\n        Ray.clone(scattered, new Ray(rec.p, refracted));\n        return true;\n    };\n    return Dialectric;\n}());\nexport default Dialectric;\n"
         }
       ],
       "filteredModules": 0
