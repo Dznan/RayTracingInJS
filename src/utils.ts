@@ -54,6 +54,17 @@ class Utils {
     public static reflect(v: Vec3, n: Vec3): Vec3 {
         return v.sub(n.scale(2 * Vec3.dot(v, n)));
     }
+
+    public static refract(v: Vec3, n: Vec3, refractionRate: number): Vec3 {
+        const cosTheta = Vec3.dot(v.neg(), n);
+        const rayOutPerp: Vec3 = (v.add(n.scale(cosTheta))).scale(refractionRate);
+        const rayOutParallel = n.scale(
+            -Math.sqrt(Math.abs(
+                1 - rayOutPerp.magnitude() * rayOutPerp.magnitude()
+            ))
+        );
+        return rayOutPerp.add(rayOutParallel);
+    }
 }
 
 export default Utils;

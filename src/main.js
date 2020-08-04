@@ -8,6 +8,7 @@ import Camera from './camera';
 import Utils from './utils';
 import Lambertian from './lambertian';
 import Metal from './metal';
+import Dialectric from "./dialectric";
 
 function rayColor(ray, world, depth) {
   if (depth <= 0)
@@ -46,8 +47,9 @@ function drawImage(canvas, ctx, samplesPerPixel=1, maxDepth=50) {
 
   const materialGround = new Lambertian(new Vec3(0.8, 0.8, 0.0));
   const materialCenter = new Lambertian(new Vec3(0.7, 0.3, 0.3));
-  const materialLeft   = new Metal(new Vec3(0.8, 0.8, 0.8));
-  const materialRight  = new Metal(new Vec3(0.8, 0.6, 0.2));
+  // const materialLeft   = new Metal(new Vec3(0.8, 0.8, 0.8), 0.3);
+  const materialLeft   = new Dialectric(1.5);
+  const materialRight  = new Metal(new Vec3(0.8, 0.6, 0.2), 1.0);
 
   world.add(new Sphere(new Vec3( 0.0, -100.5, -1.0), 100.0, materialGround));
   world.add(new Sphere(new Vec3( 0.0,    0.0, -1.0),   0.5, materialCenter));
