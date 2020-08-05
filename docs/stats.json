@@ -4,10 +4,10 @@
   "warnings": [
   ],
   "version": "4.44.1",
-  "hash": "9c4a163cb001913baa99",
-  "time": 2758,
-  "builtAt": 1596639384156,
-  "publicPath": "RayTracingInJS/",
+  "hash": "172e4faa36cf1754ed14",
+  "time": 3116,
+  "builtAt": 1596639662918,
+  "publicPath": "",
   "outputPath": "/Users/zenandong/WebstormProjects/ray-tracing/docs",
   "assetsByChunkName": {
     "main": "render.js"
@@ -48,7 +48,7 @@
     },
     {
       "name": "render.js",
-      "size": 1529,
+      "size": 1514,
       "chunks": [
         0
       ],
@@ -61,7 +61,7 @@
     },
     {
       "name": "render.worker.js",
-      "size": 10347,
+      "size": 10332,
       "chunks": [
       ],
       "chunkNames": [
@@ -124,7 +124,7 @@
       "files": [
         "render.js"
       ],
-      "hash": "8d5cff5d979820d07bb4",
+      "hash": "f6541c28989162052d82",
       "siblings": [
       ],
       "parents": [
@@ -498,7 +498,7 @@
       ],
       "warnings": [
       ],
-      "publicPath": "RayTracingInJS/",
+      "publicPath": "",
       "outputPath": "/Users/zenandong/WebstormProjects/ray-tracing/docs",
       "assetsByChunkName": {
         "main": "render.worker.js"
@@ -506,7 +506,7 @@
       "assets": [
         {
           "name": "render.worker.js",
-          "size": 10347,
+          "size": 10332,
           "chunks": [
             0
           ],
@@ -560,7 +560,7 @@
           "files": [
             "render.worker.js"
           ],
-          "hash": "d27e029fb192521d9088",
+          "hash": "6ffbbfeab886c813b39b",
           "siblings": [
           ],
           "parents": [
