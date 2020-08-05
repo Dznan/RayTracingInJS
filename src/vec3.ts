@@ -103,6 +103,15 @@ class Vec3 {
     return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
   }
 
+  public static cross(out: Vec3 | undefined, a: Vec3 | Vec3Array, b: Vec3 | Vec3Array): Vec3 {
+    if (!out)
+      out = Vec3.zeros();
+    out[0] = a[1] * b[2] - a[2] * b[1];
+    out[1] = a[2] * b[0] - a[0] * b[2];
+    out[2] = a[0] * b[1] - a[1] * b[0];
+    return out;
+  }
+
   public static magnitude(v: Vec3 | Vec3Array): number {
     return Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
   }
@@ -156,6 +165,10 @@ class Vec3 {
 
   public dot(b: Vec3 | Vec3Array): number {
     return Vec3.dot(this, b);
+  }
+
+  public cross(b: Vec3 | Vec3Array): Vec3 {
+    return Vec3.cross(undefined, this, b);
   }
 
   public magnitude(): number {
