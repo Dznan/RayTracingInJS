@@ -2,10 +2,21 @@ import Worker from './render.worker';
 
 const worker = new Worker();
 
-function render() {
-  const canvas = document.querySelector('#canvas');
-  const offscreenCanvas = canvas.transferControlToOffscreen();
+let canvas, offscreenCanvas;
 
+function init() {
+  canvas = document.querySelector('#canvas');
+  offscreenCanvas = canvas.transferControlToOffscreen();
+
+  worker.postMessage({
+      msg: 'init',
+      canvas: offscreenCanvas,
+    },
+    [offscreenCanvas]
+  );
+}
+
+function render() {
   let samplesPerPixel = document.querySelector('#spp').value;
   let depth = document.querySelector('#depth').value;
 
@@ -14,18 +25,22 @@ function render() {
 
   worker.postMessage({
       msg: 'render',
-      canvas: offscreenCanvas,
       payload: {
         samplesPerPixel,
         depth
       }
     },
-    [offscreenCanvas]
   );
 
   worker.addEventListener('message', (ev) => {
-    console.log('window', ev);
+    console.log('window', ev.data.progress);
+    if (ev.data.progress) {
+      const progressDom = document.querySelector('#progress');
+      progressDom.setAttribute('value', ev.data.progress.toString());
+    }
   });
 }
 
 window.render = render;
+
+window.onload = init;

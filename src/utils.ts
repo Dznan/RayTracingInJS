@@ -45,10 +45,16 @@ class Utils {
 
     public static randomInHemisphere(normal: Vec3): Vec3 {
         const v = Utils.randomInUnitSphere();
-        if (Vec3.dot(v, normal) > 0.0)
-            return v;
-        else
-            return v.neg();
+        return Vec3.dot(v, normal) > 0.0 ? v : v.neg();
+    }
+
+    public static randomInUnitDisk(): Vec3 {
+        while (true) {
+            let p: Vec3 = new Vec3(Utils.random(-1, 1), Utils.random(-1, 1), 0);
+            if (p.magnitude() >= 1)
+                continue;
+            return p;
+        }
     }
 
     public static reflect(v: Vec3, n: Vec3): Vec3 {

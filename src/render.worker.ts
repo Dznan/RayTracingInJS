@@ -9,6 +9,7 @@ import Utils from './utils';
 import Lambertian from './lambertian';
 import Metal from './metal';
 import Dialectric from "./dialectric";
+import {Material} from "./material";
 
 function rayColor(ray: Ray, world: Hittable, depth: number): Vec3 {
     if (depth <= 0)
@@ -54,6 +55,56 @@ function setupWorld(): Hittable {
     return world;
 }
 
+function setupRandomScene(): Hittable {
+    const world: HittableList = new HittableList();
+
+    const groundMaterial: Material = new Lambertian(new Vec3(0.5, 0.5, 0.5));
+    world.add(new Sphere(new Vec3(0,-1000,0), 1000, groundMaterial));
+
+    for (let a = -11; a < 11; ++a) {
+        for (let b = -11; b < 11; ++b) {
+            const choose_mat = Utils.random();
+            const center: Vec3 = new Vec3(a + 0.9*Utils.random(), 0.2, b + 0.9*Utils.random());
+
+            if ((center.sub(new Vec3(4, 0.2, 0))).magnitude() > 0.9) {
+                let sphereMaterial: Material;
+
+                if (choose_mat < 0.8) {
+                    // diffuse
+                    const albedo = new Vec3(
+                        Utils.random(0, 1.0), Utils.random(0, 1.0), Utils.random(0, 1.0)
+                    ).mul(
+                        new Vec3(Utils.random(0, 1.0), Utils.random(0, 1.0), Utils.random(0, 1.0))
+                    );
+                    sphereMaterial = new Lambertian(albedo);
+                    world.add(new Sphere(center, 0.2, sphereMaterial));
+                } else if (choose_mat < 0.95) {
+                    // metal
+                    const albedo = new Vec3(Utils.random(0.5, 1), Utils.random(0.5, 1), Utils.random(0.5, 1));
+                    const fuzz = Utils.random(0, 0.5);
+                    sphereMaterial = new Metal(albedo, fuzz);
+                    world.add(new Sphere(center, 0.2, sphereMaterial));
+                } else {
+                    // glass
+                    sphereMaterial = new Dialectric(1.5);
+                    world.add(new Sphere(center, 0.2, sphereMaterial));
+                }
+            }
+        }
+    }
+
+    const material1 = new Dialectric(1.5);
+    world.add(new Sphere(new Vec3(0, 1, 0), 1.0, material1));
+
+    const material2 = new Lambertian(new Vec3(0.4, 0.2, 0.1));
+    world.add(new Sphere(new Vec3(-4, 1, 0), 1.0, material2));
+
+    const material3 = new Metal(new Vec3(0.7, 0.6, 0.5), 0.0);
+    world.add(new Sphere(new Vec3(4, 1, 0), 1.0, material3));
+
+    return world;
+}
+
 function drawImage(
     canvas: OffscreenCanvas | HTMLCanvasElement,
     ctx: OffscreenCanvasRenderingContext2D | CanvasRenderingContext2D,
@@ -67,16 +118,31 @@ function drawImage(
     const image = new Image(width, height);
 
     // setup camera
+    // const eye: Vec3 = new Vec3(3, 3, 2);
+    // const lookAt: Vec3 = new Vec3(0, 0, -1);
+    // const up: Vec3 = new Vec3(0, 1, 0);
+    // const distToFocus: number = eye.sub(lookAt).magnitude();
+    // const aperture: number = 2.0;
+
+    const eye: Vec3 = new Vec3(13, 2, 3);
+    const lookAt: Vec3 = new Vec3(0, 0, 0);
+    const up: Vec3 = new Vec3(0, 1, 0);
+    const distToFocus: number = 10.0;
+    const aperture: number = 0.1;
+
     const camera = new Camera(
         aspectRatio,
-        90,
-        new Vec3(-2, 2, 1),
-        new Vec3(0, 0, -1),
-        new Vec3(0, 1, 0)
+        20,
+        aperture,
+        distToFocus,
+        eye,
+        lookAt,
+        up
     );
 
     // setup world
-    const world = setupWorld();
+    // const world = setupWorld();
+    const world = setupRandomScene();
 
     // render
     for (let i = 0; i < width; ++i) {
@@ -92,13 +158,15 @@ function drawImage(
             // ImageData's origin is on top left corner
             image.setPixel(i, height - j - 1, Utils.sampleColor(sampleColors));
         }
+        if (Math.round(i / width * 100) % 2 == 0)
+            postMessage({progress: i / width});
     }
 
     // draw image
     ctx.putImageData(image.imageData, 0, 0);
 }
 
-function render(canvas: OffscreenCanvas, samplesPerPixel: number, depth: number): void {
+function render(canvas: OffscreenCanvas | HTMLCanvasElement, samplesPerPixel: number, depth: number): void {
     if (!canvas.getContext) {
         console.log('Canvas is not supported in this browser!');
         return;
@@ -115,9 +183,13 @@ function render(canvas: OffscreenCanvas, samplesPerPixel: number, depth: number)
     drawImage(canvas, ctx, samplesPerPixel, depth);
 }
 
+let canvas: OffscreenCanvas | HTMLCanvasElement;
+
 function messageHandler(ev: MessageEvent) {
-    if (ev.data.msg === 'render') {
-        render(ev.data.canvas, ev.data.payload.samplesPerPixel, ev.data.payload.depth);
+    if (ev.data.msg === 'init') {
+        canvas = ev.data.canvas;
+    } else if (ev.data.msg === 'render') {
+        render(canvas, ev.data.payload.samplesPerPixel, ev.data.payload.depth);
     }
 }
 
