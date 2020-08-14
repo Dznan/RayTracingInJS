@@ -159,7 +159,7 @@ function drawImage(
             image.setPixel(i, height - j - 1, Utils.sampleColor(sampleColors));
         }
         if (Math.round(i / width * 100) % 2 == 0)
-            postMessage({progress: i / width});
+            self.postMessage({progress: i / width});
     }
 
     // draw image
@@ -193,4 +193,4 @@ function messageHandler(ev: MessageEvent) {
     }
 }
 
-addEventListener('message', messageHandler);
+self.addEventListener('message', messageHandler);
